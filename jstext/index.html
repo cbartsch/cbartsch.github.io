@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="jstext">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>JS Text Engine</title>
+
+    <script src="js/jstext-ext.js"></script>
+    <script src="js/jstext.js"></script>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container" ng-controller="GameController">
+    <main>
+        <div class="panel panel-default">
+            <div class="panel-heading location">
+                <h1 ng-bind-html="location.text"></h1>
+            </div>
+
+            <div class="panel-body">
+                <div class="row location">
+                    <div class="col-sm-8 col-sm-offset-2 location-img"
+                         style="background-image: url({{location.image}});">
+                    </div>
+
+                    <div class="col-sm-2 inventory">
+                        <i class="glyphicon glyphicon-briefcase pull-right"></i>
+
+                        <div class="clearfix"></div>
+                        <ul class="nav nav-stacked navbar-right">
+                            <li ng-repeat="(name, item) in inventory">
+                                <a href="#input" ng-click="useItem(name)"> {{name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row log-cont" scroll-glue>
+                    <ul class="log">
+                        <li ng-repeat="entry in log"
+                            ng-bind-html="entry.text"
+                            ng-class="entry.type"></li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <form ng-submit="command()" class="form">
+                        <div class="form-group">
+                            <div class="col-sm-11">
+                                <input type="text" id="inputfield" autofocus ng-model="input" class="form-control"
+                                       placeholder="Write command...">
+                            </div>
+                            <div class="col-sm-1">
+                                <input type="submit" class="btn btn-primary" value="Send">
+                                <a name="input"></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel-footer footer">
+                JS Text Adventure
+            </div>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

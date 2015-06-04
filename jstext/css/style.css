@@ -1,0 +1,46 @@
+div.container {
+    padding-top: 3rem;
+}
+
+ul.log {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 2rem;
+}
+
+.row.location {
+    border-bottom: 1px solid rgb(221, 221, 221);
+    padding-bottom: 15px;
+}
+.footer {
+    text-align: center;
+    font-size: 8pt;
+}
+
+div.log-cont {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.panel-heading.location > h1 {
+    margin: 0;
+}
+div.location-img {
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+ul.log li.output {
+    color: black;
+}
+
+ul.log li.input {
+    color: grey;
+    font-weight: bold;
+}
+
+ul.log li.input::before {
+    content: "> ";
+}

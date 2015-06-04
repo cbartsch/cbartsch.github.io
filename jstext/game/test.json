@@ -1,0 +1,337 @@
+{
+  "start": "bedroom",
+  "start_text": "You wake up in your bed, covered by a warm blanket.%nYou open your eyes, but can't see anything.%nTime to go to university!",
+  "locations": {
+    "bedroom": {
+      "text": "Bedroom",
+      "imageUrl": "http://www.citrusinteria.com/wp-content/uploads/2015/04/bedroom1.jpg",
+      "visible": false,
+      "adjacent": ["hallway"],
+      "look": {"text": "My bedroom. It contains a light, a desk and your wardrobe. A door leeds to the hallway."},
+      "objects": {
+        "blanket": {
+          "use": {
+            "text": "You pulled off the blanket and are greeted by your legs.",
+            "do": [
+              {
+                "type": "visible",
+                "targets": ["legs"]
+              }
+            ]
+          },
+          "look": {"text": "A warm blanket."},
+          "take": {"text": "I don't need my blanket for university."}
+        },
+        "light": {
+          "state": "off",
+          "use": {
+            "text": "Turned on the light",
+            "if": [
+              {
+                "type": "state",
+                "targets": ["light"],
+                "value": "off",
+                "else": "I like it more, when it's on."
+              }
+            ],
+            "do": [
+              {
+                "type": "state",
+                "targets": ["light"],
+                "value": "on"
+              },
+              {
+                "type": "visible",
+                "targets": [
+                  "bedroom",
+                  "door",
+                  "desk",
+                  "wardrobe"
+                ]
+              }
+            ]
+          },
+          "look": {"text": "A lamp on your night stand."},
+          "take": {"text": "No. It wouldn't work without plugging it in anyway."}
+        },
+        "legs": {
+          "visible": false,
+          "use": {
+            "text": "You get out of the bed.",
+            "do": [
+              {
+                "type": "enable",
+                "targets": ["desk", "drawer", "wardrobe", "door"]
+              }, {
+                "type": "visible",
+                "value": false,
+                "targets": ["legs"]
+              }
+            ]
+          },
+          "look": {"text": "Your legs."},
+          "take": {"text": "They are already part of my body!"}
+        },
+        "desk": {
+          "visible": false,
+          "enabled": false,
+          "look": {
+            "text": "There is a desk with a drawer.",
+            "do": [
+              {
+                "type": "visible",
+                "targets": ["drawer"]
+              }
+            ]
+          },
+          "use": {"text": "What should I do with it?"},
+          "take": {"text": "No way!"}
+        },
+        "drawer": {
+          "visible": false,
+          "enabled": false,
+          "look": {"text": "A drawer on the desk."},
+          "take": {"text": "It is firmly attached to the desk."},
+          "use": {
+            "text": "You opened the drawer. The key to your room is in it.",
+            "do": [
+              {
+                "type": "visible",
+                "targets": ["room key"]
+              }
+            ]
+          }
+        },
+        "room key": {
+          "visible": false,
+          "look": {"text": "A small key."},
+          "take": {
+            "text": "You pick up the key.",
+            "do": [{"type": "take"}]
+          }
+        },
+        "wardrobe": {
+          "visible": false,
+          "enabled": false,
+          "look": {"text": "Your wardrobe. Contains clothes and various stuff."},
+          "state": "closed",
+          "use": {
+            "text": "You opened the wardrobe.",
+            "if": [
+              {
+                "type": "state",
+                "targets": ["wardrobe"],
+                "value": "closed",
+                "else": "It's already open."
+              }
+            ],
+            "do": [
+              {
+                "type": "visible",
+                "targets": ["clothes"]
+              },
+              {
+                "type": "state",
+                "value": "open"
+              }
+            ]
+          }
+        },
+        "clothes": {
+          "visible": false,
+          "look": {"text": "Your clothes: Pants and a shirt."},
+          "take": {
+            "text": "You put on your clothes.",
+            "do": [{"type": "take"}]
+          }
+        },
+        "door": {
+          "visible": false,
+          "enabled": false,
+          "state": "closed",
+          "look": {"text": "The door of your bedroom."},
+          "use": {
+            "if": [
+              {
+                "type": "state",
+                "targets": ["door"],
+                "value": "closed",
+                "else": "The door is already open"
+              }
+            ],
+            "text": "The door is locked."
+          },
+          "take": {"text": "I don't think so."},
+          "use_with": {
+            "item": "room key",
+            "text": "You opened the door.",
+            "if": [
+              {
+                "type": "state",
+                "targets": ["door"],
+                "value": "closed",
+                "else": "The door is already open"
+              }
+            ],
+            "do": [
+              {
+                "type": "enable",
+                "targets": ["hallway"]
+              },
+              {
+                "type": "state",
+                "value": "open"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "kitchen": {
+      "text": "Kitchen",
+      "imageUrl": "https://s-media-cache-ak0.pinimg.com/originals/ea/3d/a7/ea3da726fb1e34dca8fd90f4693f6360.jpg",
+      "adjacent": ["hallway"],
+      "look": {"text": "Your more or less clean kitchen.%nIt contains a counter and a fridge."},
+      "objects": {
+        "counter": {
+          "look": {
+            "text": "On the counter, you see a stove, a sink, a toaster and a bread box.",
+            "do": [
+              {
+                "type": "visible",
+                "targets": [
+                  "stove",
+                  "sink",
+                  "bread box",
+                  "toaster"
+                ]
+              }
+            ]
+          }
+        },
+        "stove": {
+          "visible": false,
+          "look": {"text": "The stove in your kitchen is a bit dirty from all the noodles you always make."},
+          "use": {"text": "There is no time to cook now."}
+        },
+        "sink": {
+          "visible": false,
+          "look": {"text": "The faucets are turned off."},
+          "use": {"text": "I'm not thirsty."}
+        },
+        "bread box": {
+          "visible": false,
+          "look": {"text": "The bread box is closed."},
+          "take": {"text": "I'm more interested in the contents of the box."},
+          "use": {
+            "text": "You opened bread box. There is one slice of toast inside.",
+            "do": [
+              {
+                "type": "visible",
+                "targets": ["toast"]
+              }
+            ]
+          }
+        },
+        "toast": {
+          "visible": false,
+          "look": {"text": "A slice of toast."},
+          "use": {"text": "I should toast it first."},
+          "take": {
+            "text": "You pick up the slice of toast.",
+            "do": [{"type": "take"}]
+          }
+        },
+        "toaster": {
+          "visible": false,
+          "state": "empty",
+          "look": {"text": "An old, one slot toaster."},
+          "use_with": {
+            "item": "toast",
+            "text": "You put the toast inside the toaster.",
+            "do": [
+              {
+                "type": "state",
+                "value": "loaded",
+                "targets": ["toaster"]
+              },
+              {
+                "type": "remove",
+                "targets": ["toast"]
+              }
+            ]
+          },
+          "use": {
+            "text": "You turned on the toaster. A toasted slice of toast and your apartment key popped out of it!",
+            "if": [
+              {
+                "type": "state",
+                "targets": ["toaster"],
+                "value": "loaded",
+                "else": "There is nothing to toast inside the toaster."
+              }
+            ],
+            "do": [
+              {
+                "type": "visible",
+                "targets": ["apartment key"]
+              },
+              {
+                "type": "state",
+                "value": "empty",
+                "targets": ["toaster"]
+              }
+            ]
+          }
+        },
+        "apartment key": {
+          "visible": false,
+          "use": {"text": "I can't use the key on it's own."},
+          "look": {"text": "The key to your apartment."},
+          "take": {
+            "text": "You picked up the apartment key",
+            "do": [{"type": "take"}]
+          }
+        },
+        "fridge": {
+          "look": {"text": "The fridge makes a quiet buzzing noise."},
+          "use": {"text": "I already know it only contains beer."},
+          "take": {"text": "That is way too heavy!"}
+        }
+      }
+    },
+    "hallway": {
+      "text": "Hallway",
+      "imageUrl": "https://tellerallaboutit.files.wordpress.com/2010/09/dsc_0008.jpg",
+      "enabled": false,
+      "adjacent": [
+        "bedroom",
+        "kitchen"
+      ],
+      "look": {"text": "The hallway of my small apartment. It contains the apartment door and a key shelf.%nIt connects the bedroom, the kitchen."},
+      "objects": {
+        "key shelf": {
+          "look": {"text": "A key shelf. Your apartment key is missing."},
+          "use": {"text": "No use in that."},
+          "take": {"text": "There is no key on it."}
+        },
+        "apartment door": {
+          "look": {"text": "The door to your apartment. One step away from the outside world."},
+          "use": {"text": "It's locked."},
+          "use_with": {
+            "item": "apartment key",
+            "text": "You left your apartment.",
+            "if": [
+              {
+                "type": "item",
+                "else": "You should put on some clothes first.",
+                "targets": ["clothes"]
+              }
+            ],
+            "do": [{"type": "win"}]
+          }
+        }
+      }
+    }
+  }
+}
