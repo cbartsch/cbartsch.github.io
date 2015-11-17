@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <title>WebController</title>
+    <script data-main="js/app.js" src="js/require.js" ></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="portrait-warning" class="portrait"></div>
+
+    <div id="button-row">
+        <div class="button left" id="connect" >Connect</div>
+        <label class="left">Timer</label>
+        <label class="left">Deaths: 0</label>
+        <div class="button left" id="settings" >Settings</div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="input-area">
+        <div id="break" class="button left no-hover">Break</div>
+        <div id="thrust" class="button right no-hover">Thrust</div>
+    </div>
+
+    <div id="settings-dialog" class="dialog-container hidden">
+        <div class="dialog">
+            <label for="host-name" class="label">Host</label>
+            <input type="text" id="host-name" class="input">
+
+            <div class="button close">Close</div>
+        </div>
+    </div>
+
+    <div id="status" class="disconnected"><span class="no-select">
+        <label id="method"></label>
+    </span></div>
+</body>
+</html>
