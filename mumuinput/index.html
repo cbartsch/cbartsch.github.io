@@ -11,16 +11,17 @@
     <div id="portrait-warning" class="portrait"></div>
 
     <div id="button-row">
-        <div class="button left" id="connect" >Connect</div>
-        <label class="left">Timer</label>
-        <label class="left">Deaths: 0</label>
-        <div class="button left" id="settings" >Settings</div>
+        <div class="button left" id="connect" ><span class="v-center">Connect</span></div>
+        <label class="left"><span id="timer" class="v-center">Timer</span></label>
+        <label class="left"><span class="v-center">Deaths: <span id="deaths">0</span></span></label>
+        <div class="button left" id="ping" ><span class="v-center">Flash</span></div>
+        <div class="button left" id="settings" ><span class="v-center">Settings</span></div>
         <div class="clear"></div>
     </div>
 
     <div id="input-area">
-        <div id="break" class="button left no-hover">Break</div>
-        <div id="thrust" class="button right no-hover">Thrust</div>
+        <div id="break" class="button left no-hover"><span class="v-center">Break</span></div>
+        <div id="thrust" class="button right no-hover"><span class="v-center">Thrust</span></div>
     </div>
 
     <div id="settings-dialog" class="dialog-container hidden">
@@ -28,12 +29,15 @@
             <label for="host-name" class="label">Host</label>
             <input type="text" id="host-name" class="input">
 
+            <label for="username" class="label">Username</label>
+            <input  type="text" id="username" class="input">
+
             <div class="button close">Close</div>
         </div>
     </div>
 
-    <div id="status" class="disconnected"><span class="no-select">
-        <label id="method"></label>
-    </span></div>
+    <div id="status" class="disconnected">
+        <label id="method" class="v-center no-select"></label>
+    </div>
 </body>
 </html>
