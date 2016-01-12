@@ -1,0 +1,1 @@
+"use strict";define(["utils","constants"],function(n,e){var t={};return t.getScreenElement=function(){return document.getElementById("connecting-screen")},t.init=function(){document.getElementById("cancel-connect").addEventListener("click",function(){t.fail()})},t.success=function(){},t.fail=function(){},t});

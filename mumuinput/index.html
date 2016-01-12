@@ -6,38 +6,120 @@
     <title>WebController</title>
     <script data-main="js/app.js" src="js/require.js" ></script>
     <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <div id="portrait-warning" class="portrait"></div>
+    <div id="connecting-screen" class="screen">
+        <div class="connecting-content v-center">
+    <p class="text">Connecting...</p>
+    <button id="cancel-connect" class="small-button">Cancel</button>
+</div>
+    </div>
+    <div id="connection-error-screen" class="screen hidden">
+        <div class="v-center connection-error-content">
+    <p class="text">Connection error!</p>
+    <p>
+        <label for="host-name" class="text label">Host</label>
+        <input type="text" id="host-name" class="input">
+    </p>
+    <button id="error-reconnect" class="small-button">Reconnect</button>
+</div>
+    </div>
+    <div id="connection-lost-screen" class="screen hidden">
+        <div class="connection-lost-content v-center">
+    <p class="text">Not connected.</p>
+    <button id="lost-reconnect" class="small-button">Connect</button>
+</div>
+    </div>
+    <div id="character-config-screen" class="screen hidden">
+        <div class="title-text-container">
+    <p class="text">Customize your character!</p>
+</div>
 
-    <div id="button-row">
-        <div class="button left" id="connect" ><span class="v-center">Connect</span></div>
-        <label class="left"><span id="timer" class="v-center">Timer</span></label>
-        <label class="left"><span class="v-center">Deaths: <span id="deaths">0</span></span></label>
-        <div class="button left" id="ping" ><span class="v-center">Flash</span></div>
-        <div class="button left" id="settings" ><span class="v-center">Settings</span></div>
-        <div class="clear"></div>
+<div class="character-view">
+    <div id="canvas-container">
+        <canvas id="character-canvas" >
+    Your browser appears to be retarded. Please stahp.
+</canvas>
+<canvas id="head-canvas" >
+    Your browser appears to be retarded. Please stahp.
+</canvas>
+
+<script id="replace-color-vertex" type="x-shader/x-vertex">
+    
+attribute vec3 vertexPosition;
+attribute vec2 texturePosition;
+
+varying vec2 texCoord;
+
+void main(void) {
+    gl_Position = vec4(vertexPosition, 1.0);
+    texCoord = texturePosition;
+}
+</script>
+<script id="replace-color-fragment" type="x-shader/x-fragment">
+    precision mediump float;
+
+uniform sampler2D texture;
+uniform vec4 redSubstituteColor;
+uniform vec4 greenSubstituteColor;
+uniform vec4 blueSubstituteColor;
+
+varying vec2 texCoord;
+
+void main(void)
+{
+    vec4 color = texture2D(texture, texCoord);
+    color.rgb = vec3(color.r * redSubstituteColor.rgb + color.g * greenSubstituteColor.rgb + color.b * blueSubstituteColor.rgb) * color.a;
+
+	gl_FragColor = color;
+}
+</script>
+        <button id="head-dec" class="arrow previous-button"></button>
+        <button id="head-inc" class="arrow next-button"></button>
+        <button id="torso-dec" class="arrow previous-button"></button>
+        <button id="torso-inc" class="arrow next-button"></button>
+    </div>
+</div>
+
+<div id="color-config-container">
+    <div class="config-block color-block">
+        <span class="text" id="primary-color-text">Primary color:</span>
+        <div id="primary-color-cont" class="color-btns"></div>
     </div>
 
-    <div id="input-area">
-        <div id="break" class="button left no-hover"><span class="v-center">Break</span></div>
-        <div id="thrust" class="button right no-hover"><span class="v-center">Thrust</span></div>
+    <div class="config-block color-block">
+        <span class="text" id="secondary-color-text">Secondary color:</span>
+        <div id="secondary-color-cont" class="color-btns"></div>
     </div>
+</div>
 
-    <div id="settings-dialog" class="dialog-container hidden">
-        <div class="dialog">
-            <label for="host-name" class="label">Host</label>
-            <input type="text" id="host-name" class="input">
+<div class="start-btn-container">
+    <button id="start" class="small-button">Start</button>
+</div>
 
-            <label for="username" class="label">Username</label>
-            <input  type="text" id="username" class="input">
-
-            <div class="button close">Close</div>
-        </div>
     </div>
+    <div id="control-screen" class="screen hidden">
+        <div id="portrait-warning" class="portrait"></div>
 
-    <div id="status" class="disconnected">
-        <label id="method" class="v-center no-select"></label>
+<div id="button-row">
+    <div class="medium-button left" id="disconnect" ><span class="v-center">Disconnect</span></div>
+    <label class="left"><span id="timer" class="v-center">Timer</span></label>
+    <label class="left"><span class="v-center">Deaths: <span id="deaths">0</span></span></label>
+    <div class="medium-button left" id="ping" >
+        <img src="img/icons/flash.png">
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div id="input-area">
+    <div id="break" class="big-button left no-hover">
+        <img src="img/icons/break.png">
+    </div>
+    <div id="thrust" class="big-button right no-hover">
+        <img src="img/icons/thrust.png">
+    </div>
+</div>
     </div>
 </body>
 </html>

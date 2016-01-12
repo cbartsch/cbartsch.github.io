@@ -1,0 +1,1 @@
+"use strict";define(["utils","constants"],function(n,e){var t={};return t.getScreenElement=function(){return document.getElementById("connection-lost-screen")},t.init=function(){document.getElementById("lost-reconnect").addEventListener("click",function(){t.success()})},t.success=function(){},t.fail=function(){},t});

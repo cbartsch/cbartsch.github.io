@@ -4,46 +4,42 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
+  background-color: gray;
   color: white;
-  font-family: sans-serif;
+  font-family: 'Exo 2', sans-serif;
   font-size: 25px;
-  background-color: black;
+}
+body {
+  background-image: url('../img/background.png');
+}
+p {
+  margin: 0;
 }
 * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
   box-sizing: border-box;
 }
 #button-row {
   height: 15%;
 }
-#button-row > .button,
+#button-row > .medium-button,
 #button-row > label {
   height: 100%;
-  width: 20%;
+  width: 25%;
   padding: 0;
 }
 #input-area {
-  height: 80%;
+  height: 85%;
 }
-#input-area > .button {
+#input-area > .big-button {
   height: 100%;
   width: 50%;
-}
-#status {
-  width: 100%;
-  height: 5%;
-  position: fixed;
-  bottom: 0;
-  text-align: center;
-  vertical-align: middle;
-}
-#status.disconnected {
-  background-color: #aaaaaa;
-}
-#status.connected {
-  background-color: #00ff00;
-}
-#status.error {
-  background-color: #ff0000;
 }
 #portrait-warning {
   z-index: 1;
@@ -57,14 +53,14 @@ body {
   background-size: 128px 128px;
   display: block;
 }
-.no-select,
-.no-select * {
+.no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  outline: none;
 }
 .left {
   float: left;
@@ -78,28 +74,313 @@ body {
 .clear:after {
   content: '';
 }
-.button {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.big-button {
   display: inline-block;
   text-align: center;
-  color: #2d2d2d;
-  background-color: #f5f5f5;
   padding: 5px 10px;
   border: 1px solid black;
-  border-radius: 3px;
+  border-image: url('../img/buttons/big/normal.png') 100 fill;
+  border-image-width: 100;
 }
-.button:hover:not(.no-hover) {
+.big-button:hover:not(.no-hover) {
   cursor: pointer;
-  background-color: #ffffff;
 }
-.button:active:not(.no-hover) {
+.big-button:active:not(.no-hover) {
   cursor: pointer;
-  background-color: #c2c2c2;
+  border-image: url('../img/buttons/big/pressed.png') 100 fill;
+  border-image-width: 100;
+}
+.big-button img {
+  pointer-events: none;
+  position: relative;
+  top: 25%;
+  height: 50%;
+}
+.medium-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/medium/normal.png') 50 fill;
+  border-image-width: 50;
+}
+.medium-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.medium-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/medium/pressed.png') 50 fill;
+  border-image-width: 50;
+}
+.medium-button img {
+  pointer-events: none;
+  position: relative;
+  top: 10%;
+  height: 80%;
+}
+.small-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/small/normal.png') 44 fill;
+  border-image-width: 44;
+}
+.small-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.small-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/small/pressed.png') 44 fill;
+  border-image-width: 44;
+}
+.small-button img {
+  pointer-events: none;
+  position: relative;
+  top: 10%;
+  height: 80%;
+}
+.next-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/arrow/next/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.next-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.next-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/arrow/next/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.next-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.previous-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/arrow/previous/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.previous-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.previous-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/arrow/previous/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.previous-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.blue-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/hexagon/blue/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.blue-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.blue-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/hexagon/blue/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.blue-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.green-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/hexagon/green/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.green-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.green-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/hexagon/green/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.green-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.orange-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/hexagon/orange/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.orange-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.orange-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/hexagon/orange/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.orange-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.pink-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/hexagon/pink/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.pink-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.pink-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/hexagon/pink/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.pink-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.red-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/hexagon/red/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.red-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.red-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/hexagon/red/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.red-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.turquoise-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/hexagon/turquoise/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.turquoise-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.turquoise-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/hexagon/turquoise/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.turquoise-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.violet-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/hexagon/violet/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.violet-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.violet-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/hexagon/violet/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.violet-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.white-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/hexagon/white/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.white-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.white-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/hexagon/white/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.white-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
+}
+.yellow-button {
+  display: inline-block;
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-image: url('../img/buttons/hexagon/yellow/normal.png') 0 fill;
+  border-image-width: 0;
+}
+.yellow-button:hover:not(.no-hover) {
+  cursor: pointer;
+}
+.yellow-button:active:not(.no-hover) {
+  cursor: pointer;
+  border-image: url('../img/buttons/hexagon/yellow/pressed.png') 0 fill;
+  border-image-width: 0;
+}
+.yellow-button img {
+  pointer-events: none;
+  position: relative;
+  top: 0%;
+  height: 100%;
 }
 .dialog-container {
   background-color: rgba(128, 128, 128, 0.6);
@@ -110,28 +391,15 @@ body {
   height: 100%;
   z-index: 1;
 }
-.dialog {
-  color: #2d2d2d;
-  background-color: #f5f5f5;
-  padding: 20px 50px;
-  border: 1px solid black;
-  border-radius: 3px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  position: relative;
-  top: 15%;
-  left: 0;
+.screen {
   width: 100%;
-  height: 85%;
-  z-index: 2;
-}
-.dialog * {
-  margin-bottom: 10px;
+  height: 100%;
 }
 .input,
 .label {
   display: block;
   width: 100%;
+  font-family: inherit;
   font-size: 25px;
   text-align: left;
 }
@@ -148,4 +416,130 @@ body {
 }
 label {
   text-align: center;
+}
+/* Character Screen */
+#color-config-container {
+  width: 270px;
+  float: right;
+  transform: scale(0.5);
+  transform-origin: top;
+}
+#canvas-container {
+  margin: 0 auto;
+  width: 250px;
+  height: 350px;
+  position: relative;
+  display: block;
+  top: 50%;
+  margin-top: -175px;
+}
+#head-canvas {
+  z-index: 1;
+  width: 113.5px;
+  height: 87px;
+  margin: 0 auto;
+  margin-top: 23px;
+  padding-left: 11.5px;
+  display: block;
+  position: relative;
+}
+#character-canvas {
+  margin: 0 auto;
+  width: 75px;
+  height: 89px;
+  position: relative;
+  display: block;
+  top: 50%;
+  margin-top: -44.5px;
+}
+.character-view {
+  height: 80%;
+  width: 100%;
+  float: left;
+  padding-right: 270px;
+  margin-right: -270px;
+}
+.title-text-container {
+  height: 10%;
+  text-align: center;
+}
+.title-text-container .text {
+  position: relative;
+  display: block;
+  top: 50%;
+  margin-top: -12.5px;
+}
+.start-btn-container {
+  position: absolute;
+  bottom: 0px;
+  height: 10%;
+  width: 100%;
+  padding-right: 270px;
+  text-align: center;
+}
+#start {
+  height: 90%;
+  width: 200px;
+}
+.color-btn {
+  position: absolute;
+  width: 75px;
+  height: 63px;
+}
+.color-btns {
+  position: relative;
+  height: 300px;
+}
+.config-block {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  height: 300px;
+}
+.arrow {
+  position: absolute;
+}
+#head-dec {
+  left: 10%;
+  top: 25%;
+}
+#head-inc {
+  right: 10%;
+  top: 25%;
+}
+#torso-dec {
+  left: 10%;
+  bottom: 25%;
+}
+#torso-inc {
+  right: 10%;
+  bottom: 25%;
+}
+.sprite-block {
+  height: 15%;
+}
+.color-block {
+  height: 290px;
+}
+.text {
+  -webkit-text-stroke: 1px black;
+}
+button {
+  min-height: 48px;
+  min-width: 48px;
+  font-size: 24px;
+  background: transparent;
+  border: 1px solid black;
+}
+.connection-error-content {
+  padding: 12px;
+  height: 250px;
+}
+.connection-lost-content {
+  padding: 12px;
+  height: 100px;
+}
+.connecting-content {
+  padding: 12px;
+  height: 50px;
 }
