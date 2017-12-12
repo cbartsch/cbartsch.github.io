@@ -53,9 +53,9 @@
         .then(function(result) {
           resultArea.innerText = "Result: " + result
           resultArea.innerText += ", " + result.getVideoTracks() 
-          resultArea.innerText += ", " + JSON.stringify(video)
+          resultArea.innerText += ", " + JSON.stringify(result)
           if(!video.srcObject) {
-            video.srcObject = stream
+            video.srcObject = result
           }
           }).catch(function(err) { resultArea.innerText = "Error: " + err + " - " + err.name + " - " + err.message })
     } else {
