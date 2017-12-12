@@ -1,0 +1,39 @@
+<html>
+<head>
+  <title>AppWebView test</title>
+</head>
+<body style="background: #ddd">
+  <h1>AppWebView test</h1>
+
+  <h1><a href="https://webrtc.github.io/samples/">WebRTC samples</a></h1>
+
+  <p><a href="https://webrtc.github.io/samples/src/content/getusermedia/gum/">getUserMedia test</a></p>
+  <p><a href="https://webrtc.github.io/samples/src/content/capture/video-video/">Video to video test</a></p>
+  <p><a href="https://webrtc.github.io/samples/src/content/peerconnection/pc1/">Basic PeerConnection test</a></p>
+
+  <h1><a href="https://fmcode.cocos.si/demo/">CDE CEP test app</a></h1>
+
+  <h1>WebRTC test</h1>
+
+  <p id="test-area" style="font-family: monospace"> </p>
+  <script type="text/javascript">
+  var exprs = [
+    "navigator",
+    "navigator.getUserMedia",
+    "navigator.mediaDevices",
+    "navigator.mediaDevices.getUserMedia",
+    "MediaStream",
+    "RTCPeerConnection"
+  ]
+
+  var testArea = document.getElementById("test-area")
+
+  exprs.forEach(function(expr) {
+    var result = eval(expr)
+    var p = document.createElement("p")
+    p.innerText = expr + " = " + result
+    testArea.appendChild(p)
+  })
+  </script>
+</body>
+</html>
