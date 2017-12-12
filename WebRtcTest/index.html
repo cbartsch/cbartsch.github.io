@@ -48,15 +48,15 @@
     })
     
 
-    if(false && navigator && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    if(navigator && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({audio: false, video: true})
         .then(function(result) {
-          resultArea.innerText = "Result: " + result
-          resultArea.innerText += ", " + result.getVideoTracks() 
-          resultArea.innerText += ", " + JSON.stringify(result)
-          if(!video.srcObject) {
-           // video.srcObject = result
-          }
+         // resultArea.innerText = "Result: " + result
+         // resultArea.innerText += ", " + result.getVideoTracks() 
+         // resultArea.innerText += ", " + JSON.stringify(result)
+         // if(!video.srcObject) {
+         //  // video.srcObject = result
+         // }
           }).catch(function(err) { resultArea.innerText = "Error: " + err + " - " + err.name + " - " + err.message })
     } else {
       resultArea.innerText = "Not supported"
