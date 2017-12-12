@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>AppWebView test</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body style="background: #ddd">
   <h1>AppWebView test</h1>
@@ -10,6 +11,7 @@
   <p><a href="https://webrtc.github.io/samples/src/content/getusermedia/gum/">getUserMedia test</a></p>
   <p><a href="https://webrtc.github.io/samples/src/content/capture/video-video/">Video to video test</a></p>
   <p><a href="https://webrtc.github.io/samples/src/content/peerconnection/pc1/">Basic PeerConnection test</a></p>
+  <video id="video" autoplay playsinline></video>
 
   <h1><a href="https://fmcode.cocos.si/demo/">CDE CEP test app</a></h1>
 
@@ -48,8 +50,14 @@
 
     if(navigator && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({audio: false, video: true})
-        .then(function(result) { resultArea.innerText = "Result: " + result })
-        .catch(function(err) { resultArea.innerText = "Error: " + err + " - " + err.name + " - " + err.message })
+        .then(function(result) {
+          resultArea.innerText = "Result: " + result
+          resultArea.innerText += ", " + result.getVideoTracks() 
+          resultArea.innerText += ", " + JSON.stringify(video)
+          if(!video.srcObject) {
+            video.srcObject = stream
+          }
+          }).catch(function(err) { resultArea.innerText = "Error: " + err + " - " + err.name + " - " + err.message })
     } else {
       resultArea.innerText = "Not supported"
     }
