@@ -16,6 +16,7 @@
   <h1>WebRTC test</h1>
 
   <p id="test-area" style="font-family: monospace"> </p>
+  <p id="result-area" style="font-family: monospace"> </p>
   <script type="text/javascript">
   var exprs = [
     "navigator",
@@ -26,9 +27,11 @@
     "RTCPeerConnection"
   ]
 
+  var testArea = document.getElementById("test-area")
+  var resultArea = document.getElementById("result-area")
+
   var time = new Date().getTime()
   function update() {
-    var testArea = document.getElementById("test-area")
     testArea.innerHTML = (new Date().getTime() - time) + " ms"
 
     exprs.forEach(function(expr) {
@@ -42,10 +45,19 @@
       testArea.appendChild(p)
     })
     
+
+    if(navigator && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({audio: false, video: true})
+        .then(function(result) { resultArea.innerText = "Result: " + result })
+        .catch(function(err) { resultArea.innerText = "Error: " + err + " - " + err.name + " - " + err.message })
+    } else {
+      resultArea.innerText = "Not supported"
+    }
+
     setTimeout(update, 1000)
   } 
 
-  setTimeout(update, 1000)
+  setTimeout(update, 0)
   </script>
 </body>
 </html>
