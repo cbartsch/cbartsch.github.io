@@ -26,14 +26,26 @@
     "RTCPeerConnection"
   ]
 
-  var testArea = document.getElementById("test-area")
+  var time = new Date().getTime()
+  function update() {
+    var testArea = document.getElementById("test-area")
+    testArea.innerHTML = (new Date().getTime() - time) + " ms"
 
-  exprs.forEach(function(expr) {
-    var result = eval(expr)
-    var p = document.createElement("p")
-    p.innerText = expr + " = " + result
-    testArea.appendChild(p)
-  })
+    exprs.forEach(function(expr) {
+      try {
+        var result = eval(expr)
+      } catch(ex) {
+        var result = ex
+      }
+      var p = document.createElement("p")
+      p.innerText = expr + " = " + result
+      testArea.appendChild(p)
+    })
+    
+    setTimeout(update, 1000)
+  } 
+
+  setTimeout(update, 1000)
   </script>
 </body>
 </html>
