@@ -1,0 +1,959 @@
+	/* CSS Style for the message box that displays "Loading..." */
+	.message {
+		border-radius: 2em;
+		border: solid 1px #6d6d6d;
+		background-color: rgba(255, 255, 255, 0.5);
+		color: black;
+		text-align: center;
+		position: absolute;
+		width: 50%;
+		height: 10%;
+		left: 25%;
+		top: 45%;
+	}
+	.restartbutton {
+		border-radius: 2em;
+		border: solid 1px #6d6d6d;
+		background-color: rgba(255, 255, 255, 0.5);
+		color: black;
+		text-align: center;
+		position: absolute;
+		width: 70%;
+		height: 10%;
+		left: 25%;
+		top: 45%;
+		display:none;
+	}
+	.scanbutton {
+		border-radius: .5em;
+		border: solid 1px #6d6d6d;
+		background-color: rgba(128, 255, 128, 0.5);
+		text-align: center;
+		position: absolute;
+		right: 5%;
+		bottom: 8%;
+		padding: 3%;
+		display: none;
+	}
+
+	.progressbar {
+		position: absolute;
+		left: 25%;
+		top: 55%;
+		width: 1%;
+		height: 5px;
+		display:none;
+		background-color: rgba(0, 0, 255, 0.8);
+		
+	}
+	
+	.swatter {
+		opacity:0.0;
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+	}
+	
+	.voucher {
+		border: solid 1px #6d6d6d;
+		background-color: rgba(255, 255, 255, 0.8);
+		color: black;
+		text-align: center;
+		position: absolute;
+		left: 10%;
+		width: 80%;
+		/*height: 80%;*/
+		top: 10%;
+		display:none;
+	}
+	
+	 #overlay {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+	   }
+	   
+	   #overlay {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				/*padding-top: 75%;*/
+			}
+			
+		#reag {
+			width: 20%;
+			position: absolute;
+			left: 80%;
+			top: 10%;
+		}
+		
+		#glass {
+			width: 150px;
+			position: absolute;
+			left: 80%;
+			top: 10%;
+						height: 90%;
+		}
+		
+		#glass_top {
+			background-image: url(resources/glass_top.png);
+			width: 150px;
+			height: 17px;
+		}
+		
+		#glass_body {
+			background-image: url(resources/glass_body.png);
+			height: 80%;
+		}
+		
+		#greeny {
+			display: inline-block;
+			margin-left: 17px;
+			width: 114px;
+			margin-top: 300%;
+			background-color: rgba(0, 255, 6, 0.72);
+			height: 30%;
+		}
+		
+		#glass_bottom {
+			background-image: url(resources/glass_bottom.png);
+			width: 150px;
+			height: 5px;
+		}
+		
+			#content {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+			}
+			#progressBody {
+				position: absolute;
+				width: 100%;
+				/*height: 10px;*/
+				top: 50%;
+				text-align: center;
+			}
+			.flyhunt-progressbar {
+				border-radius: 2em;
+				background-color: #DDD;
+				background-image: linear-gradient(bottom, rgb(221,221,221) 16%, rgb(189,189,189) 80%, rgb(221,221,221) 87%);
+background-image: -o-linear-gradient(bottom, rgb(221,221,221) 16%, rgb(189,189,189) 80%, rgb(221,221,221) 87%);
+background-image: -moz-linear-gradient(bottom, rgb(221,221,221) 16%, rgb(189,189,189) 80%, rgb(221,221,221) 87%);
+background-image: -webkit-linear-gradient(bottom, rgb(221,221,221) 16%, rgb(189,189,189) 80%, rgb(221,221,221) 87%);
+background-image: -ms-linear-gradient(bottom, rgb(221,221,221) 16%, rgb(189,189,189) 80%, rgb(221,221,221) 87%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.16, rgb(221,221,221)),
+	color-stop(0.8, rgb(189,189,189)),
+	color-stop(0.87, rgb(221,221,221))
+);
+				width: 100%;
+				height: 100%;
+			}
+			.flyhunt-progressbar div {
+				background-color: #534942;
+background-image: linear-gradient(bottom, rgb(83,73,66) 16%, rgb(130,110,96) 80%, rgb(83,73,66) 87%);
+background-image: -o-linear-gradient(bottom, rgb(83,73,66) 16%, rgb(130,110,96) 80%, rgb(83,73,66) 87%);
+background-image: -moz-linear-gradient(bottom, rgb(83,73,66) 16%, rgb(130,110,96) 80%, rgb(83,73,66) 87%);
+background-image: -webkit-linear-gradient(bottom, rgb(83,73,66) 16%, rgb(130,110,96) 80%, rgb(83,73,66) 87%);
+background-image: -ms-linear-gradient(bottom, rgb(83,73,66) 16%, rgb(130,110,96) 80%, rgb(83,73,66) 87%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.16, rgb(83,73,66)),
+	color-stop(0.8, rgb(130,110,96)),
+	color-stop(0.87, rgb(83,73,66))
+);
+				border-radius: 1em;
+			}
+			
+			/*
+			.flyhunt-background {
+				background-image: url(http://dl.dropbox.com/u/3112357/wikitude-online/ARchitectScripts/worlds/huntthefly/resources/cover.png);
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}*/
+			
+			#messager {
+				margin-left: 10%;
+				margin-right: 10%;
+				padding-top: 10px;
+				padding-bottom: 15px;
+				width: 80%;
+				text-align: center;
+				border-radius: 1em;
+				background-color: rgba(0, 200, 6, 0.8);
+				font-size: 100%;
+				font-family: "arial";
+			}
+			#messager h1 {
+				margin: 0px;
+			}
+			
+			.progText {
+				display: inline-block;
+				background-color: rgba(0, 255, 6, 0.72);
+				border-radius: 1em 1em 0em 0em;
+				position: relative;
+				top: 5px;
+				font-family: "arial";
+			}
+			
+			.prog250 .progText {
+				width: 200px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
+			.prog480 .progText {				
+				width: 400px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
+			.prog800 .progText {
+				width: 600px;
+			}
+			.prog1024 .progText {
+				width: 800px;
+			}
+			.prog2048 .progText {
+				width: 800px;
+			}
+			
+			#nextProgress250 {
+				background-image: url(resources/250/loading.png);
+				width: 200px;
+				height: 34px;
+				background-position: 0px 0px;
+				display: inline-block;
+				font-family: "arial";
+			}
+			
+			#nextProgress480 {
+				background-image: url(resources/250/loading.png);
+				width: 200px;
+				height: 68px;
+				background-position: 0px 0px;
+				display: inline-block;
+				font-family: "arial";
+			}
+			
+			#nextProgress800 {
+				background-image: url(resources/800/loading.png);
+				width: 600px;
+				height: 102px;
+				background-position: 0px 0px;
+				display: inline-block;
+				font-family: "arial";
+			}
+			
+			#nextProgress1024 {
+				background-image: url(resources/1024/loading.png);
+				width: 800px;
+				height: 137px;
+				background-position: 0px 0px;
+				display: inline-block;
+				font-family: "arial";
+			}
+			
+			#nextProgress2048 {
+				background-image: url(resources/2048/loading.png);
+				width: 800px;
+				height: 137px;
+				background-position: 0px 0px;
+				display: inline-block;
+				font-family: "arial";
+			}
+			/* in general */
+			#flyhunt-endcount-body {
+				position: absolute;
+				width: 100%;
+				top: 17%; /*was 47*/
+				text-align: center;
+			}
+			
+			@media screen and (orientation:landscape) {
+				#flyhunt-endcount-body {
+				position: absolute;
+				width: 100%;
+				top: 30%; /*(changed) was 40%*/
+				text-align: center;
+			}
+			}
+			
+			#flyhunt-endcount {
+				background-repeat: no-repeat;
+				display: inline-block;
+			}
+			#flyhunt-count {
+				font-family: "arial";
+				font-weight: bold;
+				font-size: 350%;
+				width: 50%;
+				text-align: center;
+			}
+			
+			#but_newGame, #but_startGame {
+				position:absolute;
+				margin-left: 30%;
+				margin-right: 30%;
+				width: 40%;
+			
+				text-align: center;
+				border-radius: 1em;
+				background-color: rgba(0, 200, 6, 0.8);
+				font-size: 14pt/100%; /* (changed) was 100%*/
+				font-family: "arial";
+				
+				background-color:black;
+			}
+			
+			#overlay {
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+
+			.where {
+				opacity:0.25;
+				position: absolute;
+				top: 15%;
+				width: 10%;
+				height: 70%;
+				background-size: 100%;
+				display: none;
+			}
+			
+			#flyhunt-left {
+				left: 0%;
+			}
+			#flyhunt-right {
+				left: 90%;
+			}
+			
+			/*look right and look left - help*/
+			#lookLeft, #lookRight  {
+				position:absolute;
+								top:55%;
+				opacity:0.7;
+				font-size: 150%;
+				
+				font-family: "arial";
+				font-weight: bold;
+				width: 20%;
+				text-align: center;
+			}
+			
+			#lookLeft {
+				margin-left: 5%;
+			}
+			
+			#lookRight {
+				margin-left:75%;
+			}
+			
+			#highScore {
+				margin-left: 25%;
+				margin-right: 25%;
+				width:50%;
+				height: 25%;
+				
+				position:absolute;
+				top: 41%; /*was 39*/
+			
+				text-align: center;
+				border-radius: 1em;
+				background-color: rgba(0, 200, 6, 0.8);
+				font-size: 14pt; /* (changed) was 170% */
+				font-family: "arial";
+				padding-top:15px;
+				font-weight: bold;
+				display:none;
+				/*new */
+				font-size: 12pt/100%;
+				
+				max-height:110pt; /*was 150pt*/
+			}
+			
+			@media screen and (min-height: 900px) {
+				#highScore {
+					/*new */
+					
+					top:45%;
+				}
+			}
+			
+			#highScore_header {
+				font-size: 20pt ; /* (changed) was 130%*/
+			}
+			
+			#highScore ul {
+				list-style-type: none;
+				padding:0px;
+			}
+			
+			#highScore li {
+				margin-left:0px;
+				padding-left:0px;	
+			}
+			
+			
+			
+			@media screen and (orientation:landscape) {
+				#highScore.highScoreDisplay {
+					display:none;
+					opacity:0;
+				}
+				.dead_fly {
+					width: 25%;
+					height: auto;
+				}
+			}
+			
+			@media screen and (orientation:portrait) {
+				#highScore.highScoreDisplay {
+					display:block;
+				}
+				.dead_fly {
+					width: 40%;
+					height: auto;
+				}
+			}
+		
+			
+			#swatter {
+				background-size: 100% 100%;
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				height: 5%;
+			}
+			
+			.dead_fly {
+				position: absolute;
+				display: none;
+				opacity: 1;
+				left: 0;
+				top: 0;
+			}
+			
+			#timer {
+				top: 1%;
+				position: absolute;
+				left: 0;
+			}
+			
+			#counter {
+				top: 5%;
+				position: absolute;
+				right: 0;
+				color: rgba()
+			}
+			
+			.amatur {
+				width: 20%;
+				color: black;
+				text-align: center;
+				font-family: "arial";
+				font-weight: 700;
+				
+			}
+			
+			#tutimg {
+				position: absolute; 
+				top: 25%; 
+				left: 25%;
+				display: none;
+			}
+	
+			@media screen and (orientation: portrait) {
+				#tutimg {
+					position: absolute; 
+					width: 100%;
+					left: 0%; 
+				}
+			}
+			
+			@media screen and (orientation: landscape) {
+				#tutimg {
+					width: 50%;
+					left: 25%; 
+				}
+			}
+			
+			/* --------------------------------------------------- */
+			/* ------------------ BOTH MODE ------------------ */
+			/* --------------------------------------------------- */
+			/* ----- */
+			/*  480  */
+			/* ----- */
+			@media screen and (min-width: 1px) and (max-width: 480px) 
+			{
+				#swatter {
+					background-image: url(resources/480/swatter.png);
+				}
+			
+				#flyhunt-endcount {
+					width: 240px;
+					height: 158px;
+					background-image: url(resources/480/fly_count.png);
+				}
+				
+				.amatur {
+					font-size: 80px;
+				}
+				#timer {
+					font-size: 50px;
+				}
+				
+				#flyhunt-count {
+					font-size: 80px;
+					width: 120px;
+					margin-left: 5px;
+					padding-top: 7px;
+				}
+				#overlay {
+					background-image: url(resources/480/cover.png);
+				}
+				
+				#flyhunt-endcount.game-over {
+					width: 240px;
+					height: 134px;
+					background-image: url(resources/480/game_over.png);
+				}
+				#flyhunt-endcount.game-over-w {
+					width: 240px;
+					height: 101px;
+					background-image: url(resources/480/game_over_w.png);
+				}
+				#flyhunt-left {
+					background-image: url(resources/480/left.png);
+				}
+				#flyhunt-right {
+					background-image: url(resources/480/right.png);
+				}
+			}
+			/* ----- */
+			/*  800  */
+			/* ----- */
+			@media screen and (min-width: 481px) and (max-width: 800px) 
+			{
+			
+				#swatter {
+					background-image: url(resources/800/swatter.png);
+				}
+				
+				#flyhunt-endcount {
+					width: 400px;
+					height: 262px;
+					background-image: url(resources/800/fly_count.png);
+				}
+				
+				.amatur {
+					font-size: 100px;
+				}
+				#timer {
+					font-size: 75px;
+				}
+				#flyhunt-count {
+					font-size: 100px;
+					width: 200px;
+					margin-left: 6px;
+					padding-top: 15pt; /*(changed) was px*/
+				}
+				#overlay {
+					background-image: url(resources/800/cover.png);
+				}
+				
+				#flyhunt-endcount.game-over {
+					width: 400px;
+					height: 224px;
+					background-image: url(resources/800/game_over.png);
+				}
+				#flyhunt-endcount.game-over-w {
+					width: 400px;
+					height: 169px;
+					background-image: url(resources/800/game_over_w.png);
+				}
+				#flyhunt-left {
+					background-image: url(resources/800/left.png);
+				}
+				#flyhunt-right {
+					background-image: url(resources/800/right.png);
+				}
+			}
+			/* ------ */
+			/*  1024  */
+			/* ------ */
+			@media screen and (min-width: 801px) and (max-width: 1024px) 
+			{
+			
+				#swatter {
+					background-image: url(resources/1024/swatter.png);
+				}
+			
+				#flyhunt-endcount {
+					width: 512px;
+					height: 335px;
+					background-image: url(resources/1024/fly_count.png);
+				}
+				
+				.amatur {
+					font-size: 150px;
+				}
+				#timer {
+					font-size: 100px;
+				}
+				
+				#flyhunt-count {
+					font-size: 150pt; /* (changed) was px*/
+					width: 250px;
+					margin-left: 10px;
+					padding-top: 30px;
+				}
+				#overlay {
+					background-image: url(resources/1024/cover.png);
+				}
+				
+				#flyhunt-endcount.game-over {
+					width:  512px;
+					height: 287px;
+					background-image: url(resources/1024/game_over.png);
+				}
+				#flyhunt-endcount.game-over-w {
+					width: 512px;
+					height: 216px;
+					background-image: url(resources/1024/game_over_w.png);
+				}
+				#flyhunt-left {
+					background-image: url(resources/1024/left.png);
+				}
+				#flyhunt-right {
+					background-image: url(resources/1024/right.png);
+				}
+			}
+			/* ------ */
+			/*  2048  */
+			/* ------ */
+			@media screen and (min-width: 1025px) 
+			{
+				
+				#swatter {
+					background-image: url(resources/2048/swatter.png);
+				}
+			
+				#flyhunt-endcount {
+					width: 1024px;
+					height: 670px;
+					background-image: url(resources/2048/fly_count.png);
+				}
+								
+				.amatur {
+					font-size: 350px;
+				}
+				#timer {
+					font-size: 200px;
+				}
+				
+				#flyhunt-count {
+					font-size: 350pt; /* (changed was 300px )*/
+					width: 600px;
+					margin-left: 10px;
+					padding-top: 15px;
+				}
+				
+				#overlay {
+					background-image: url(resources/2048/cover.png);
+				}
+				
+				#flyhunt-endcount.game-over {
+					width: 1024px;
+					height: 573px;
+					background-image: url(resources/2048/game_over.png);
+				}
+				#flyhunt-endcount.game-over-w {
+					width: 1024px;
+					height: 432px;
+					background-image: url(resources/2048/game_over_w.png);
+				}
+				#flyhunt-left {
+					background-image: url(resources/2048/left.png);
+				}
+				#flyhunt-right {
+					background-image: url(resources/2048/right.png);
+				}
+			}
+			
+			#flyhunt-endcount.game-over #flyhunt-count {
+				font-size: 1px; /*(changed was 1px)*/
+				width: 100%;
+				margin-left: 0px;
+				padding-top: 0px;
+			}
+			
+						
+			#but_newGame, #but_startGame {
+				text-transform: capitalize;
+				font-weight: 700;
+				font-size: 18pt;
+				z-index: 999;
+			}
+			
+			/* --------------------------------------------------- */
+			/* ------------------ PORTRAIT MODE ------------------ */
+			/* --------------------------------------------------- */
+
+				/* device over 1024 px */
+				@media screen and (orientation:portrait) and (min-device-height:1025px) {
+				/*@media screen and (orientation:portrait) and (min-device-width:1025px) {*/
+					#but_newGame, #but_startGame {
+						margin-left: 30%;
+						margin-right: 30%;
+						bottom:10%;
+						padding-top: 10px; /* was 10px;*/
+						padding-bottom: 15px;
+						width: 40%;
+						border-radius: 1em;
+						background-color: rgba(0, 255, 6, 0.72);
+					}
+				}
+				
+				/* device up to 1024 px */
+				@media screen and (orientation:portrait) and (max-device-height:1024px) {
+				/*@media screen and (orientation:portrait) and (max-device-width:1025px) {*/
+					#but_newGame, #but_startGame {
+						margin-left: 30%;
+						margin-right: 30%;
+						bottom:10%;
+						padding-top: 10px; /* was 10px;*/
+						padding-bottom: 15px;
+						width: 40%;
+						border-radius: 1em;
+						background-color: rgba(0, 255, 6, 0.72);
+					}
+				}
+			
+				/* device up to 800 px */
+				@media screen and (orientation:portrait) and (max-device-height:800px) {
+				/*@media screen and (orientation:portrait) and (max-device-width:801px) {*/
+					#but_newGame, #but_startGame {
+						margin-left: 30%;
+						margin-right: 30%;
+						bottom:10%;
+						padding-top: 10px; /* was 10px;*/
+						padding-bottom: 15px;
+						width: 40%;
+						border-radius: 1em;
+						background-color: rgba(0, 255, 6, 0.72);
+					}
+					
+				}
+
+				/* device up to 480 px */
+				@media screen and (orientation:portrait) and (max-device-height:480px) {
+				/*@media screen and (orientation:portrait) and (max-device-width:481px) {*/
+					#but_newGame, #but_startGame {
+						margin-left: 30%;
+						margin-right: 30%;
+						bottom:10%;
+						padding-top: 10px; /* was 10px;*/
+						padding-bottom: 15px;
+						width: 40%;
+						border-radius: 1em;
+						background-color: rgba(0, 255, 6, 0.72);
+					}
+
+				}
+			
+			
+			/* ---------------------------------------------------- */
+			/* ------------------ LANDSCAPE MODE ------------------ */
+			/* ---------------------------------------------------- */
+			/* device over 1024 px */
+			@media screen and (orientation:landscape) and (min-device-width:1025px) {
+
+				#but_newGame, #but_startGame {
+						margin-left: 30%;
+						margin-right: 30%;
+						bottom:10%;
+						padding-top: 10px; /* was 10px;*/
+						padding-bottom: 15px;
+						width: 40%;
+						border-radius: 1em;
+						background-color: rgba(0, 255, 6, 0.72);
+					}
+
+				}
+				
+				/* device up to 1024 px */
+				@media screen and (orientation:landscape) and (max-device-width:1024px) {
+					
+					#but_newGame, #but_startGame {
+						margin-left: 30%;
+						margin-right: 30%;
+						bottom:10%;
+						padding-top: 10px; /* was 10px;*/
+						padding-bottom: 15px;
+						width: 40%;
+						border-radius: 1em;
+						background-color: rgba(0, 255, 6, 0.72);
+					}
+
+				}
+				
+				/* device up to 800 px */
+				@media screen and (orientation:landscape) and(max-device-width:800px) {
+					
+					#but_newGame, #but_startGame {
+						margin-left: 30%;
+						margin-right: 30%;
+						bottom:10%;
+						padding-top: 10px; /* was 10px;*/
+						padding-bottom: 15px;
+						width: 40%;
+						border-radius: 1em;
+						background-color: rgba(0, 255, 6, 0.72);
+					}
+
+				}
+				
+				
+				
+				/* device up to 480 px */
+				@media screen and (orientation:landscape) and (max-device-width:480px) {
+					
+					
+					#but_newGame, #but_startGame {
+						margin-left: 30%;
+						margin-right: 30%;
+						bottom:10%;
+						padding-top: 10px; /* was 10px;*/
+						padding-bottom: 15px;
+						width: 40%;
+						border-radius: 1em;
+						
+						background-color: rgba(0, 255, 6, 0.72);
+					}
+
+				}
+				
+		/*new specially for galaxy nexus which has a resolution of 1280 x 720*/
+		/*
+		@media screen and (orientation:landscape) and 
+			(max-device-width:1290px) and 
+			(min-device-width:1200px) and
+			(max-device-height:730px) and
+			(min-device-height:700px) 
+		{
+		
+				#flyhunt-endcount {
+					width: 512px;
+				height: 335px;
+				text-align:center;
+				left:30%;
+				position:absolute;
+					background-image: url(resources/1024/fly_count.png);
+				}
+				#flyhunt-count {
+					font-size: 150pt; 
+					width: 250px;
+					margin-left: 10px;
+					padding-top: 30px;
+				}
+				#flyhunt-canvas {
+					background-image: url(resources/1024/cover.png);
+				}
+				
+				#flyhunt-endcount.game-over {
+					width: 512px;
+				height: 287px;
+				text-align:center;
+				left:30%;
+					background-image: url(resources/1024/game_over.png);
+				}
+				#flyhunt-endcount.game-over-w {
+					width: 512px;
+					height: 216px;
+					text-align:center;
+					
+					background-image: url(resources/1024/game_over_w.png);
+				}
+				#flyhunt-left {
+					background-image: url(resources/1024/left.png);
+				}
+				#flyhunt-right {
+					background-image: url(resources/1024/right.png);
+				}
+			
+			#flyhunt-endcount {
+					width: 512px;
+					height: 335px;
+					background-image: url(resources/1024/fly_count.png);
+				}
+				#flyhunt-count {
+					font-size: 150pt; 
+					width: 250px;
+					margin-left: 10px;
+					padding-top: 30px;
+				}
+				#flyhunt-canvas {
+					background-image: url(resources/1024/cover.png);
+				}
+				
+				#flyhunt-endcount.game-over {
+					width:  512px;
+					height: 287px;
+					background-image: url(resources/1024/game_over.png);
+				}
+				#flyhunt-endcount.game-over-w {
+					width: 512px;
+					height: 216px;
+					background-image: url(resources/1024/game_over_w.png);
+				}
+				#flyhunt-left {
+					background-image: url(resources/1024/left.png);
+				}
+				#flyhunt-right {
+					background-image: url(resources/1024/right.png);
+				}
+			}
+			
+			
+			
+			#flyhunt-endcount {
+				width: 800px;
+				height: 523px;
+				text-align:center;
+				left:30%;
+				position:absolute;
+			}
+			
+			#flyhunt-endcount.game-over {
+				width: 800px;
+				height: 448px;
+				text-align:center;
+				left:30%;
+			}
+			#flyhunt-endcount.game-over-w {
+				width: 800px;
+				height: 338px;
+				text-align:center;
+				left:30%;
+			}
+		}
+*/		
+		
+				
+	
+			
+			
