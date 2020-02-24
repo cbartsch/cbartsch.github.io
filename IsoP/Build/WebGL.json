@@ -1,7 +1,7 @@
 {
 "companyName": "Impossibru",
 "productName": "IsoPlatformer",
-"productVersion": "0.4",
+"productVersion": "0.5",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
 "wasmFrameworkUrl": "WebGL.wasm.framework.unityweb",
