@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- audiofileselector.qdoc -->
+  <title>AudioFileSelector QML Type | BeatLib</title>
+<link rel="stylesheet" type="text/css" href="style/style.css"/>
+</head>
+<body>
+<p class="header"><small><a href='./index.html'>BeatLib</a></small></p><hr/><div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#signals">Signals</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">AudioFileSelector QML Type</h1>
+<span class="subtitle"></span>
+<!-- $$$AudioFileSelector-brief -->
+<p>Shows a native dialog to select an audio file. <a href="#details">More...</a></p>
+<!-- @@@AudioFileSelector -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import  </td></tr></table></div><ul>
+<li><a href="qml-audiofileselector-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="signals"></a>
+<h2 id="signals">Signals</h2>
+<ul>
+<li class="fn">void <b><b><a href="qml-audiofileselector.html#audioFileSelected-signal">audioFileSelected</a></b></b>(<i>fileName</i>)</li>
+<li class="fn">void <b><b><a href="qml-audiofileselector.html#audioStreamSelected-signal">audioStreamSelected</a></b></b>(<i>stream</i>)</li>
+</ul>
+<a name="methods"></a>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn">void <b><b><a href="qml-audiofileselector.html#openAudioStream-method">openAudioStream</a></b></b>(<i>fileName</i>)</li>
+<li class="fn">void <b><b><a href="qml-audiofileselector.html#selectAudioFile-method">selectAudioFile</a></b></b>()</li>
+<li class="fn">void <b><b><a href="qml-audiofileselector.html#selectAudioStream-method">selectAudioStream</a></b></b>()</li>
+</ul>
+<!-- $$$AudioFileSelector-description -->
+<a name="details"></a>
+<h2 id="details">Detailed Description</h2>
+<p>This QML type shows a native dialog to select an audio file. You can either call it to obtain an audio file name or directly open it as <a href="qml-audiostream.html">AudioStream</a> instance.</p>
+<p><b>Note: </b>On some operating systems, like Android, the file names provided by <a href="qml-audiofileselector.html#audioFileSelected-signal">audioFileSelected()</a> are may not be usable by other Qt or QML types, only by the method <a href="qml-audiofileselector.html#openAudioStream-method">openAudioStream()</a>.</p><!-- @@@AudioFileSelector -->
+<h2>Signal Documentation</h2>
+<!-- $$$audioFileSelected[overload1]$$$audioFileSelected -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="">
+<td class="tblQmlFuncNode"><p>
+<a name="audioFileSelected-signal"></a><span class="type">void</span> <span class="name">audioFileSelected</span>(<i>fileName</i>)</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Emitted when the user selects an audio file after a call to <a href="qml-audiofileselector.html#selectAudioFile-method">selectAudioFile()</a>.</p>
+<p>The parameter <i>fileName</i> is the path to the selected file.</p>
+</div></div><!-- @@@audioFileSelected -->
+<br/>
+<!-- $$$audioStreamSelected[overload1]$$$audioStreamSelected -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="">
+<td class="tblQmlFuncNode"><p>
+<a name="audioStreamSelected-signal"></a><span class="type">void</span> <span class="name">audioStreamSelected</span>(<i>stream</i>)</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Emitted when the user selects an audio file after a call to <a href="qml-audiofileselector.html#selectAudioStream-method">selectAudioStream()</a>.</p>
+<p>The parameter <i>stream</i> is an <a href="qml-audiostream.html">AudioStream</a> instance reading the selected file.</p>
+</div></div><!-- @@@audioStreamSelected -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$openAudioStream[overload1]$$$openAudioStream -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="">
+<td class="tblQmlFuncNode"><p>
+<a name="openAudioStream-method"></a><span class="type">void</span> <span class="name">openAudioStream</span>(<i>fileName</i>)</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Open an audio file at <i>fileName</i> and create an <a href="qml-audiostream.html">AudioStream</a> instance.</p>
+</div></div><!-- @@@openAudioStream -->
+<br/>
+<!-- $$$selectAudioFile[overload1]$$$selectAudioFile -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="">
+<td class="tblQmlFuncNode"><p>
+<a name="selectAudioFile-method"></a><span class="type">void</span> <span class="name">selectAudioFile</span>()</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Show a platform-native file dialog to select an audio file.</p>
+<p>When the user selects a file in the dialog, <a href="qml-audiofileselector.html#audioFileSelected-signal">audioFileSelected()</a> will be emitted.</p>
+</div></div><!-- @@@selectAudioFile -->
+<br/>
+<!-- $$$selectAudioStream[overload1]$$$selectAudioStream -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="">
+<td class="tblQmlFuncNode"><p>
+<a name="selectAudioStream-method"></a><span class="type">void</span> <span class="name">selectAudioStream</span>()</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Show a platform-native file dialog to select an audio file.</p>
+<p>When the user selects a file in the dialog, <a href="qml-audiofileselector.html#audioStreamSelected-signal">audioStreamSelected()</a> will be emitted.</p>
+</div></div><!-- @@@selectAudioStream -->
+<br/>
+<hr/><p class="footer"><small><a href='https://cbartsch.github.io'>cbartsch.github.io</a></small></p></body>
+</html>

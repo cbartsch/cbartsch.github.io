@@ -30,13 +30,35 @@
 <a name="methods"></a>
 <h2 id="methods">Methods</h2>
 <ul>
+<li class="fn">bool <b><b><a href="qml-audioeffect.html#processSample-method-1">processSample</a></b></b>(<i>channels</i>,  int <i>sampleIndex</i>,  real <i>maxValue</i>,  real <i>minValue</i>)</li>
 <li class="fn">bool <b><b><a href="qml-audioeffect.html#processSample-method">processSample</a></b></b>(<i>channels</i>,  int <i>sampleIndex</i>,  real <i>maxValue</i>,  real <i>minValue</i>)</li>
 </ul>
 <!-- $$$AudioEffect-description -->
 <a name="details"></a>
 <h2 id="details">Detailed Description</h2>
+<p>An <a href="qml-audioeffect.html">AudioEffect</a> can be used with <a href="qml-mp3decoder.html#effect-prop">MP3Decoder::effect</a> to analyze and/or modify its decoded audio signal.</p>
+<p><a href="qml-audioeffect.html">AudioEffect</a> itself is an abstract type. You can use one of the existing concrete types, or subclass <a href="qml-audioeffect.html">AudioEffect</a> yourself and override the <a href="qml-audioeffect.html#processSample-method">processSample()</a> method.</p>
+<p>Existing types include:</p>
+<ul>
+<li><a href="qml-beatdetector.html">BeatDetector</a></li>
+<li><a href="qml-directform2filter.html">DirectForm2Filter</a></li>
+<li><a href="qml-multieffect.html">MultiEffect</a></li>
+<li><a href="qml-peakfinder.html">PeakFinder</a></li>
+<li><a href="qml-volumedetector.html">VolumeDetector</a></li>
+</ul>
 <!-- @@@AudioEffect -->
 <h2>Method Documentation</h2>
+<!-- $$$processSample$$$processSampleintrealreal -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="">
+<td class="tblQmlFuncNode"><p>
+<a name="processSample-method-1"></a><span class="type">bool</span> <span class="name">processSample</span>(<i>channels</i>,  <span class="type">int</span> <i>sampleIndex</i>,  <span class="type">real</span> <i>maxValue</i>,  <span class="type">real</span> <i>minValue</i>)</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Process one sample of the <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal. The parameter <code>channels</code> contains one <code>real</code> sample value for each channel of the audio signal. This means it is an array with 1 entry for mono signals and 2 entries for stereo signals.</p>
+<p>This method should be overridden in custom <a href="qml-audioeffect.html">AudioEffect</a> implementations. The values in <code>channels</code> can be modified. However the data is only written back to the original signal if this method returns true. Even if you did not modifiy the data, return false to indicate this, for improved performance.</p>
+</div></div><!-- @@@processSample -->
+<br/>
 <!-- $$$processSample[overload1]$$$processSampleintrealreal -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
@@ -44,9 +66,10 @@
 <td class="tblQmlFuncNode"><p>
 <a name="processSample-method"></a><span class="type">bool</span> <span class="name">processSample</span>(<i>channels</i>,  <span class="type">int</span> <i>sampleIndex</i>,  <span class="type">real</span> <i>maxValue</i>,  <span class="type">real</span> <i>minValue</i>)</p></td></tr>
 </table></div>
-</div><div class="qmldoc"><p>Process one sample of the <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal. The parameter <code>channels</code> contains one <code>real</code> sample value for each channel of the audio signal. This means it is an array with 1 entry for mono signals and 2 entries for stereo signals.</p>
-<p>This method should be overridden in custom <a href="qml-audioeffect.html">AudioEffect</a> implementations. The values in <code>channels</code> can be modified. However the data is only written back to the original signal if this method returns true. Even if you did not modifiy the data, return false to indicate this, for improved performance.</p>
-</div></div><!-- @@@processSample -->
+</div><div class="qmldoc"><p>Process one sample of the <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal. The parameter <i>channels</i> contains one <code>real</code> sample value for each channel of the audio signal. This means it is an array with 1 entry for mono signals and 2 entries for stereo signals.</p>
+<p>This method should be overridden in custom <a href="qml-audioeffect.html">AudioEffect</a> implementations. The values in <i>channels</i> can be modified. However the data is only written back to the original signal if this method returns true. Even if you did not modifiy the data, return false to indicate this, for improved performance.</p>
+<p>The parameter <i>sampleIndex</i> indicates this sample's index, from the start of the audio signal. The parameters <i>minValue</i> and <i>maxValue</i> indicate the sample's range. These are often but not necessarily <code>-1.0</code> and <code>1.0</code>, respectively.</p>
+<p><b>Note: </b>This method is not callable from QML, it is only called internal from <a href="qml-mp3decoder.html">MP3Decoder</a>.</p></div></div><!-- @@@processSample -->
 <br/>
 <hr/><p class="footer"><small><a href='https://cbartsch.github.io'>cbartsch.github.io</a></small></p></body>
 </html>
