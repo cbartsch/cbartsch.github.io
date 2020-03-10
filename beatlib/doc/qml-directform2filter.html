@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- directform2filter.qdoc -->
+  <title>DirectForm2Filter QML Type | BeatLib</title>
+<link rel="stylesheet" type="text/css" href="style/style.css"/>
+</head>
+<body>
+<p class="header"><small><a href='./index.html'>BeatLib</a></small></p><hr/><div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">DirectForm2Filter QML Type</h1>
+<span class="subtitle"></span>
+<!-- $$$DirectForm2Filter-brief -->
+<p>Applies a DF2 filter to an audio signal. <a href="#details">More...</a></p>
+<!-- @@@DirectForm2Filter -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import  </td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-audioeffect.html">AudioEffect</a></p>
+</td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-volumedetector.html">VolumeDetector</a></p>
+</td></tr></table></div><ul>
+<li><a href="qml-directform2filter-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="properties"></a>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn"><b><b><a href="qml-directform2filter.html#data-prop">data</a></b></b> : var</li>
+</ul>
+<!-- $$$DirectForm2Filter-description -->
+<a name="details"></a>
+<h2 id="details">Detailed Description</h2>
+<p>This audio effect applies a <a href="https://ccrma.stanford.edu/~jos/filters/Direct_Form_II.html">direct form 2</a> filter to an <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal.</p>
+<!-- @@@DirectForm2Filter -->
+<h2>Property Documentation</h2>
+<!-- $$$data -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="">
+<td class="tblQmlPropNode"><p>
+<a name="data-prop"></a><span class="name">data</span> : <span class="type">var</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>The DF2 filter's data. Set it to a JSON object with the following entries:</p>
+<ul>
+<li><code>order</code>: The filter's order, or the number of iterations it performs. This is twice the number of second order sections the filter contains.</li>
+<li><code>sosMatrix</code>: The filter's second order sections data, as a 2D JS array of <code>real</code> values. It should have <code>order / 2</code> sub-entries each with 6 <code>real</code> values. These 6 values represent this filter section's coefficients <code>a0, a1, a2, b0, b1, b2</code>.</li>
+<li><code>scaleValues</code>: The filter's second order sections scale values, as a JS array of <code>real</code> values.</li>
+</ul>
+<p>Example:</p>
+<pre class="qml"><span class="type"><a href="qml-directform2filter.html">DirectForm2Filter</a></span> {
+  <span class="name">data</span>: ({
+    order: <span class="number">8</span>,
+    sosMatrix: [
+      [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, -<span class="number">1.999582010463876</span>, <span class="number">0.999583152065339</span>],
+      [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, -<span class="number">1.998812233343328</span>, <span class="number">0.998813374505309</span>],
+      [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, -<span class="number">1.998223471725322</span>, <span class="number">0.998224612551167</span>],
+      [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, -<span class="number">1.997904980861054</span>, <span class="number">0.997906121505067</span>]
+    ],
+    scaleValues: [
+      <span class="number">0.000000285400366</span>, <span class="number">0.000000285290495</span>, <span class="number">0.000000285206461</span>, <span class="number">0.000000285161003</span>
+    ]
+  })
+}</pre>
+</div></div><!-- @@@data -->
+<br/>
+<hr/><p class="footer"><small><a href='https://cbartsch.github.io'>cbartsch.github.io</a></small></p></body>
+</html>

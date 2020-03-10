@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- audioeffect.qdoc -->
+  <title>AudioEffect QML Type | BeatLib</title>
+<link rel="stylesheet" type="text/css" href="style/style.css"/>
+</head>
+<body>
+<p class="header"><small><a href='./index.html'>BeatLib</a></small></p><hr/><div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#methods">Methods</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">AudioEffect QML Type</h1>
+<span class="subtitle"></span>
+<!-- $$$AudioEffect-brief -->
+<p>Analyzes and/or modifies <a href="qml-mp3decoder.html">MP3Decoder</a> output. <a href="#details">More...</a></p>
+<!-- @@@AudioEffect -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import  </td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-beatdetector.html">BeatDetector</a>, <a href="qml-directform2filter.html">DirectForm2Filter</a>, <a href="qml-multieffect.html">MultiEffect</a>, and <a href="qml-peakfinder.html">PeakFinder</a></p>
+</td></tr></table></div><ul>
+<li><a href="qml-audioeffect-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="methods"></a>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn">bool <b><b><a href="qml-audioeffect.html#processSample-method">processSample</a></b></b>(<i>channels</i>,  int <i>sampleIndex</i>,  real <i>maxValue</i>,  real <i>minValue</i>)</li>
+</ul>
+<!-- $$$AudioEffect-description -->
+<a name="details"></a>
+<h2 id="details">Detailed Description</h2>
+<!-- @@@AudioEffect -->
+<h2>Method Documentation</h2>
+<!-- $$$processSample[overload1]$$$processSampleintrealreal -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="">
+<td class="tblQmlFuncNode"><p>
+<a name="processSample-method"></a><span class="type">bool</span> <span class="name">processSample</span>(<i>channels</i>,  <span class="type">int</span> <i>sampleIndex</i>,  <span class="type">real</span> <i>maxValue</i>,  <span class="type">real</span> <i>minValue</i>)</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Process one sample of the <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal. The parameter <code>channels</code> contains one <code>real</code> sample value for each channel of the audio signal. This means it is an array with 1 entry for mono signals and 2 entries for stereo signals.</p>
+<p>This method should be overridden in custom <a href="qml-audioeffect.html">AudioEffect</a> implementations. The values in <code>channels</code> can be modified. However the data is only written back to the original signal if this method returns true. Even if you did not modifiy the data, return false to indicate this, for improved performance.</p>
+</div></div><!-- @@@processSample -->
+<br/>
+<hr/><p class="footer"><small><a href='https://cbartsch.github.io'>cbartsch.github.io</a></small></p></body>
+</html>
