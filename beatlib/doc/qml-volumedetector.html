@@ -38,15 +38,15 @@
 <!-- $$$VolumeDetector-description -->
 <a name="details"></a>
 <h2 id="details">Detailed Description</h2>
-<p>Detects the volume of an <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal. It does so by using a <a href="qml-peakfinder.html">PeakFinder</a> on the absolute value on the signal.</p>
-<p>It is advisible to filter the signal before using a <a href="qml-volumedetector.html">VolumeDetector</a>. Since this is a subclass of <a href="qml-directform2filter.html">DirectForm2Filter</a>, just set its <a href="qml-directform2filter.html#data-prop">DirectForm2Filter::data</a> property to do so.</p>
+<p>Detects the volume of an <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal. It does so by using a <a href="qml-peakfinder.html">PeakFinder</a> on the absolute value on the filtered signal.</p>
+<p>This is a subclass of <a href="qml-directform2filter.html">DirectForm2Filter</a>, but the filtering is performed on the signal's absolute value. For volume detection it is advisible to set the <a href="qml-directform2filter.html#data-prop">DirectForm2Filter::data</a> property to a smoothing, e.g&#x2e; low-pass filter.</p>
 <p>The current volume can be read from <a href="qml-volumedetector.html#volume-prop">volume</a>.</p>
 <!-- @@@VolumeDetector -->
 <h2>Property Documentation</h2>
 <!-- $$$filterDelayMs -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="filterDelayMs-prop">
 <td class="tblQmlPropNode"><p>
 <a name="filterDelayMs-prop"></a><span class="name">filterDelayMs</span> : <span class="type">int</span></p></td></tr>
 </table></div>
@@ -56,7 +56,7 @@
 <!-- $$$startTime -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="startTime-prop">
 <td class="tblQmlPropNode"><p>
 <a name="startTime-prop"></a><span class="name">startTime</span> : <span class="type">int</span></p></td></tr>
 </table></div>
@@ -67,7 +67,7 @@
 <!-- $$$updateIntervalMs -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="updateIntervalMs-prop">
 <td class="tblQmlPropNode"><p>
 <a name="updateIntervalMs-prop"></a><span class="name">updateIntervalMs</span> : <span class="type">int</span></p></td></tr>
 </table></div>
@@ -77,11 +77,11 @@
 <!-- $$$volume -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="volume-prop">
 <td class="tblQmlPropNode"><p>
 <a name="volume-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">volume</span> : <span class="type">real</span></p></td></tr>
 </table></div>
-</div><div class="qmldoc"><p>The current detected volume, a <code>real</code> value between <code>0</code> and <code>1</code>.</p>
+</div><div class="qmldoc"><p>The current detected volume, a <code>real</code> value between <code>0</code> and <code>1</code>. Realistically usually below <code>0.5</code>, but this depends on the signal and the <a href="qml-directform2filter.html#data-prop">DirectForm2Filter::data</a> setting.</p>
 </div></div><!-- @@@volume -->
 <br/>
 <hr/><p class="footer"><small><a href='https://cbartsch.github.io'>cbartsch.github.io</a></small></p></body>

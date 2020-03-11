@@ -32,7 +32,7 @@
 <ul>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#busyRate-prop">busyRate</a></b></b> : real</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#busyRateAverage-prop">busyRateAverage</a></b></b> : real</li>
-<li class="fn"><b><b><a href="qml-mp3decoder.html#effect-prop">effect</a></b></b> : list&lt;AudioEffect&gt;</li>
+<li class="fn"><b><b><a href="qml-mp3decoder.html#effect-prop">effect</a></b></b> : AudioEffect</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#metaData-prop">metaData</a></b></b> : MP3MetaData</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#running-prop">running</a></b></b> : bool</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#sampleRate-prop">sampleRate</a></b></b> : int</li>
@@ -41,18 +41,20 @@
 <a name="methods"></a>
 <h2 id="methods">Methods</h2>
 <ul>
-<li class="fn"><b><b><a href="qml-mp3decoder.html#play-method">play</a></b></b>(<i>stream</i>)</li>
+<li class="fn"><b><b><a href="qml-mp3decoder.html#play-method">play</a></b></b>(var <i>stream</i>)</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#stop-method">stop</a></b></b>()</li>
 </ul>
 <!-- $$$MP3Decoder-description -->
 <a name="details"></a>
 <h2 id="details">Detailed Description</h2>
+<p>This QML type decodes and plays MP3 files. It can also apply signal-processing effects to the decoded data before playing. Set the <a href="qml-mp3decoder.html#effect-prop">effect</a> to any instance of <a href="qml-audioeffect.html">AudioEffect</a> for this. To use more than one effect, use <a href="qml-multieffect.html">MultiEffect</a>.</p>
+<p>You can play a file directly by calling <a href="qml-mp3decoder.html#play-method">play()</a> with a file name parameter. Alternatively you can use an <a href="qml-audiostream.html">AudioStream</a> instance as parameter to <a href="qml-mp3decoder.html#play-method">play()</a>. Such streams can be obtained from one of the <a href="qml-audiofileselector.html">AudioFileSelector</a> methods. This allows using platform-native file paths, like <code>content://</code> on Android.</p>
 <!-- @@@MP3Decoder -->
 <h2>Property Documentation</h2>
 <!-- $$$busyRate -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="busyRate-prop">
 <td class="tblQmlPropNode"><p>
 <a name="busyRate-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">busyRate</span> : <span class="type">real</span></p></td></tr>
 </table></div>
@@ -62,7 +64,7 @@
 <!-- $$$busyRateAverage -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="busyRateAverage-prop">
 <td class="tblQmlPropNode"><p>
 <a name="busyRateAverage-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">busyRateAverage</span> : <span class="type">real</span></p></td></tr>
 </table></div>
@@ -72,9 +74,9 @@
 <!-- $$$effect -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="effect-prop">
 <td class="tblQmlPropNode"><p>
-<a name="effect-prop"></a><span class="name">effect</span> : <span class="type">list</span>&lt;<span class="type"><a href="qml-audioeffect.html">AudioEffect</a></span>&gt;</p></td></tr>
+<a name="effect-prop"></a><span class="name">effect</span> : <span class="type"><a href="qml-audioeffect.html">AudioEffect</a></span></p></td></tr>
 </table></div>
 </div><div class="qmldoc"><p>An <a href="qml-audioeffect.html">AudioEffect</a> instance that is applied to the <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal. The effect may alter the signal or just analyze it, based on <a href="qml-audioeffect.html#processSample-method">AudioEffect::processSample()</a>'s return value.</p>
 <p>You can use more than 1 effect by setting this property to a <a href="qml-multieffect.html">MultiEffect</a> instance.</p>
@@ -83,7 +85,7 @@
 <!-- $$$metaData -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="metaData-prop">
 <td class="tblQmlPropNode"><p>
 <a name="metaData-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">metaData</span> : <span class="type"><a href="qml-mp3metadata.html">MP3MetaData</a></span></p></td></tr>
 </table></div>
@@ -93,7 +95,7 @@
 <!-- $$$running -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="running-prop">
 <td class="tblQmlPropNode"><p>
 <a name="running-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">running</span> : <span class="type">bool</span></p></td></tr>
 </table></div>
@@ -104,7 +106,7 @@
 <!-- $$$sampleRate -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="sampleRate-prop">
 <td class="tblQmlPropNode"><p>
 <a name="sampleRate-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">sampleRate</span> : <span class="type">int</span></p></td></tr>
 </table></div>
@@ -114,7 +116,7 @@
 <!-- $$$startTime -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="startTime-prop">
 <td class="tblQmlPropNode"><p>
 <a name="startTime-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">startTime</span> : <span class="type">int</span></p></td></tr>
 </table></div>
@@ -122,21 +124,21 @@
 </div></div><!-- @@@startTime -->
 <br/>
 <h2>Method Documentation</h2>
-<!-- $$$play[overload1]$$$play -->
+<!-- $$$play -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="play-method">
 <td class="tblQmlFuncNode"><p>
-<a name="play-method"></a><span class="name">play</span>(<i>stream</i>)</p></td></tr>
+<a name="play-method"></a><span class="name">play</span>(<span class="type">var</span> <i>stream</i>)</p></td></tr>
 </table></div>
 </div><div class="qmldoc"><p>Decode and play back an MP3 stream in the <a href="qml-mp3decoder.html">MP3Decoder</a>.</p>
 <p>The parameter <i>stream</i> can either be an MP3 file's path or an <a href="qml-audiostream.html">AudioStream</a> instance.</p>
 </div></div><!-- @@@play -->
 <br/>
-<!-- $$$stop[overload1]$$$stop -->
+<!-- $$$stop -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="stop-method">
 <td class="tblQmlFuncNode"><p>
 <a name="stop-method"></a><span class="name">stop</span>()</p></td></tr>
 </table></div>

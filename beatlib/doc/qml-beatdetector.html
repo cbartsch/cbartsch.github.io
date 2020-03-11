@@ -41,12 +41,11 @@
 <a name="signals"></a>
 <h2 id="signals">Signals</h2>
 <ul>
-<li class="fn"><b><b><a href="qml-beatdetector.html#beatDetected-signal">beatDetected</a></b></b>(<i>currentTime</i>,  int <i>sampleIndex</i>,  real <i>envValue</i>,  real <i>diffValue</i>,  real <i>maxValue</i>,  real <i>volume</i>)</li>
+<li class="fn"><b><b><a href="qml-beatdetector.html#beatDetected-signal">beatDetected</a></b></b>(int <i>currentTime</i>,  int <i>sampleIndex</i>,  real <i>envValue</i>,  real <i>diffValue</i>,  real <i>maxValue</i>,  real <i>volume</i>)</li>
 </ul>
 <a name="methods"></a>
 <h2 id="methods">Methods</h2>
 <ul>
-<li class="fn">void <b><b><a href="qml-beatdetector.html#resetState-method-1">resetState</a></b></b>()</li>
 <li class="fn">void <b><b><a href="qml-beatdetector.html#resetState-method">resetState</a></b></b>()</li>
 </ul>
 <!-- $$$BeatDetector-description -->
@@ -59,27 +58,27 @@
 <!-- $$$beatHalfLifeTimeMs -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="beatHalfLifeTimeMs-prop">
 <td class="tblQmlPropNode"><p>
 <a name="beatHalfLifeTimeMs-prop"></a><span class="name">beatHalfLifeTimeMs</span> : <span class="type">real</span></p></td></tr>
 </table></div>
-</div><div class="qmldoc"><p>Set this to a time in milliseconds to use as a time to fade out a detected beat's volume. This volume is used in combination with <a href="qml-beatdetector.html#volumeDetector-prop">volumeDetector</a> as a minimum volume for the next detected beat.</p>
+</div><div class="qmldoc"><p>Set this to a time in milliseconds to use as a time to fade out a detected beat's intensity. This volume is used in combination with <a href="qml-beatdetector.html#envelopeDetector-prop">envelopeDetector</a> as a minimum intensity for the next detected beat.</p>
 </div></div><!-- @@@beatHalfLifeTimeMs -->
 <br/>
 <!-- $$$envelopeDetector -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="envelopeDetector-prop">
 <td class="tblQmlPropNode"><p>
 <a name="envelopeDetector-prop"></a><span class="name">envelopeDetector</span> : <span class="type"><a href="qml-audioeffect.html">AudioEffect</a></span></p></td></tr>
 </table></div>
-</div><div class="qmldoc"><p>Set this to an <a href="qml-audioeffect.html">AudioEffect</a> instance to apply to detect the audio signal's envelope. This is used in combination with the <a href="qml-beatdetector.html#beatHalfLifeTimeMs-prop">beatHalfLifeTimeMs</a> for detecting the next beat's minimum volume.</p>
+</div><div class="qmldoc"><p>Set this to an <a href="qml-audioeffect.html">AudioEffect</a> instance to apply to detect the audio signal's envelope. The envelope is then analyzed and whenever it rises significantly, <a href="qml-beatdetector.html#beatDetected-signal">beatDetected()</a> is emitted.</p>
 </div></div><!-- @@@envelopeDetector -->
 <br/>
 <!-- $$$minTimeDistanceMs -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="minTimeDistanceMs-prop">
 <td class="tblQmlPropNode"><p>
 <a name="minTimeDistanceMs-prop"></a><span class="name">minTimeDistanceMs</span> : <span class="type">real</span></p></td></tr>
 </table></div>
@@ -89,7 +88,7 @@
 <!-- $$$preEffect -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="preEffect-prop">
 <td class="tblQmlPropNode"><p>
 <a name="preEffect-prop"></a><span class="name">preEffect</span> : <span class="type"><a href="qml-audioeffect.html">AudioEffect</a></span></p></td></tr>
 </table></div>
@@ -99,7 +98,7 @@
 <!-- $$$volumeDetector -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="volumeDetector-prop">
 <td class="tblQmlPropNode"><p>
 <a name="volumeDetector-prop"></a><span class="name">volumeDetector</span> : <span class="type"><a href="qml-volumedetector.html">VolumeDetector</a></span></p></td></tr>
 </table></div>
@@ -107,40 +106,30 @@
 </div></div><!-- @@@volumeDetector -->
 <br/>
 <h2>Signal Documentation</h2>
-<!-- $$$beatDetected[overload1]$$$beatDetectedintrealrealrealreal -->
+<!-- $$$beatDetected -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="beatDetected-signal">
 <td class="tblQmlFuncNode"><p>
-<a name="beatDetected-signal"></a><span class="name">beatDetected</span>(<i>currentTime</i>,  <span class="type">int</span> <i>sampleIndex</i>,  <span class="type">real</span> <i>envValue</i>,  <span class="type">real</span> <i>diffValue</i>,  <span class="type">real</span> <i>maxValue</i>,  <span class="type">real</span> <i>volume</i>)</p></td></tr>
+<a name="beatDetected-signal"></a><span class="name">beatDetected</span>(<span class="type">int</span> <i>currentTime</i>,  <span class="type">int</span> <i>sampleIndex</i>,  <span class="type">real</span> <i>envValue</i>,  <span class="type">real</span> <i>diffValue</i>,  <span class="type">real</span> <i>maxValue</i>,  <span class="type">real</span> <i>volume</i>)</p></td></tr>
 </table></div>
 </div><div class="qmldoc"><p>Emitted when a beat is detected. This happens ahead of time, when the beat is calculated from the current audio buffer.</p>
 <p>The parameters contain information about the beat:</p>
 <ul>
 <li><i>currentTime</i>: The current time in milliseconds since <code>1970/01/01</code> at the time the signal is emitted.</li>
-<li><i>sampleIndex</i>: Index of the beat's sample, from the start of the audio signal. To calculate the beat's time in seoncds since the start of the audio signal, divide by the <a href="qml-mp3decoder.html#sampleRate-prop">MP3Decoder::sampleRate</a>.</li>
-<li><i>envValue</i>: The current amplitude of the audio signal's calculated envelope at the time of the beat.</li>
-<li><i>diffValue</i>: The current change in amplitude of the audio signal's calculated envelope at the time of the beat.</li>
-<li><i>maxValue</i>: The maximum value in the range for <i>envValue</i> and <i>diffValue</i>. Usually this is <code>1.0</code>.</li>
-<li><i>volume</i>: The current volume of the audio signal's calculated envelope at the time of the beat. This is only meaningful if <a href="qml-beatdetector.html#volumeDetector-prop">BeatDetector::volumeDetector</a> is set.</li>
+<li><i>sampleIndex</i>: Index of the beat's sample, from the start of the audio signal. To calculate the beat's time in seconds since the start of the audio signal, divide by the <a href="qml-mp3decoder.html#sampleRate-prop">MP3Decoder::sampleRate</a>.</li>
+<li><i>envValue</i>: The current amplitude of the audio signal's calculated envelope at the time of the beat. This value indicates the song's intensity at the time of the beat.</li>
+<li><i>diffValue</i>: The is the current change in amplitude of the audio signal's calculated envelope at the time of the beat. This value indicates the beat's intensity. A beat is detected when the <i>diffValue</i> is at a local peak maximum.</li>
+<li><i>maxValue</i>: The maximum value in the range for <i>envValue</i>. Usually this is <code>1.0</code>.</li>
+<li><i>volume</i>: The current volume of the audio signal at the time of the beat. This is only meaningful if <a href="qml-beatdetector.html#volumeDetector-prop">BeatDetector::volumeDetector</a> is set.</li>
 </ul>
 </div></div><!-- @@@beatDetected -->
 <br/>
 <h2>Method Documentation</h2>
-<!-- $$$resetState$$$resetState -->
+<!-- $$$resetState -->
 <div class="qmlitem"><div class="qmlproto">
 <div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
-<td class="tblQmlFuncNode"><p>
-<a name="resetState-method-1"></a><span class="type">void</span> <span class="name">resetState</span>()</p></td></tr>
-</table></div>
-</div><div class="qmldoc"><p>Reset the filter algorithm's state and memory. Call this to treat the rest of the <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal like a completely new audio signal.</p>
-</div></div><!-- @@@resetState -->
-<br/>
-<!-- $$$resetState[overload1]$$$resetState -->
-<div class="qmlitem"><div class="qmlproto">
-<div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="">
+<tr valign="top" class="odd" id="resetState-method">
 <td class="tblQmlFuncNode"><p>
 <a name="resetState-method"></a><span class="type">void</span> <span class="name">resetState</span>()</p></td></tr>
 </table></div>
