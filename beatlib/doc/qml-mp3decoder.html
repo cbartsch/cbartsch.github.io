@@ -33,10 +33,13 @@
 <li class="fn"><b><b><a href="qml-mp3decoder.html#busyRate-prop">busyRate</a></b></b> : real</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#busyRateAverage-prop">busyRateAverage</a></b></b> : real</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#effect-prop">effect</a></b></b> : AudioEffect</li>
+<li class="fn"><b><b><a href="qml-mp3decoder.html#idle-prop">idle</a></b></b> : bool</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#metaData-prop">metaData</a></b></b> : MP3MetaData</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#running-prop">running</a></b></b> : bool</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#sampleRate-prop">sampleRate</a></b></b> : int</li>
 <li class="fn"><b><b><a href="qml-mp3decoder.html#startTime-prop">startTime</a></b></b> : int</li>
+<li class="fn"><b><b><a href="qml-mp3decoder.html#state-prop">state</a></b></b> : bool</li>
+<li class="fn"><b><b><a href="qml-mp3decoder.html#stopping-prop">stopping</a></b></b> : bool</li>
 </ul>
 <a name="methods"></a>
 <h2 id="methods">Methods</h2>
@@ -59,6 +62,7 @@
 <a name="busyRate-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">busyRate</span> : <span class="type">real</span></p></td></tr>
 </table></div>
 </div><div class="qmldoc"><p>Contains a value indicating the time the <a href="qml-mp3decoder.html">MP3Decoder</a> spends being busy decoding audio. This is a value between <code>0</code> (never busy) and <code>1</code> (always busy).</p>
+<p><b>See also </b><a href="qml-mp3decoder.html#busyRateAverage-prop">busyRateAverage</a>.</p>
 </div></div><!-- @@@busyRate -->
 <br/>
 <!-- $$$busyRateAverage -->
@@ -69,6 +73,7 @@
 <a name="busyRateAverage-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">busyRateAverage</span> : <span class="type">real</span></p></td></tr>
 </table></div>
 </div><div class="qmldoc"><p>Contains an average of <a href="qml-mp3decoder.html#busyRate-prop">busyRate</a> over the current decoding process, since calling <a href="qml-mp3decoder.html#play-method">play()</a>.</p>
+<p><b>See also </b><a href="qml-mp3decoder.html#busyRate-prop">busyRate</a>.</p>
 </div></div><!-- @@@busyRateAverage -->
 <br/>
 <!-- $$$effect -->
@@ -81,6 +86,18 @@
 </div><div class="qmldoc"><p>An <a href="qml-audioeffect.html">AudioEffect</a> instance that is applied to the <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal. The effect may alter the signal or just analyze it, based on <a href="qml-audioeffect.html#processSample-method">AudioEffect::processSample()</a>'s return value.</p>
 <p>You can use more than 1 effect by setting this property to a <a href="qml-multieffect.html">MultiEffect</a> instance.</p>
 </div></div><!-- @@@effect -->
+<br/>
+<!-- $$$idle -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="idle-prop">
+<td class="tblQmlPropNode"><p>
+<a name="idle-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">idle</span> : <span class="type">bool</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Contains <code>true</code> if the <a href="qml-mp3decoder.html">MP3Decoder</a> is currently ready to start decoding and playing audio.</p>
+<p>This is <code>true</code> before calling <a href="qml-mp3decoder.html#play-method">play()</a> and <code>true</code> initially or after calling <a href="qml-mp3decoder.html#stop-method">stop()</a>.</p>
+<p><b>See also </b><a href="qml-mp3decoder.html#state-prop">state</a>, <a href="qml-mp3decoder.html#running-prop">running</a>, <a href="qml-mp3decoder.html#stopping-prop">stopping</a>, <a href="qml-mp3decoder.html#play-method">play()</a>, and <a href="qml-mp3decoder.html#stop-method">stop()</a>.</p>
+</div></div><!-- @@@idle -->
 <br/>
 <!-- $$$metaData -->
 <div class="qmlitem"><div class="qmlproto">
@@ -100,7 +117,8 @@
 <a name="running-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">running</span> : <span class="type">bool</span></p></td></tr>
 </table></div>
 </div><div class="qmldoc"><p>Contains <code>true</code> if the <a href="qml-mp3decoder.html">MP3Decoder</a> is currently decoding and playing audio.</p>
-<p>This is <code>true</code> after calling <a href="qml-mp3decoder.html#play-method">play()</a> and <code>false</code> initially or after calling <a href="qml-mp3decoder.html#stop-method">stop()</a>.</p>
+<p>This is <code>true</code> after calling <a href="qml-mp3decoder.html#play-method">play()</a> and <code>false</code> initially or after calling <a href="qml-mp3decoder.html#stop-method">stop()</a> and the current buffer has been emptied.</p>
+<p><b>See also </b><a href="qml-mp3decoder.html#state-prop">state</a>, <a href="qml-mp3decoder.html#idle-prop">idle</a>, <a href="qml-mp3decoder.html#stopping-prop">stopping</a>, <a href="qml-mp3decoder.html#play-method">play()</a>, and <a href="qml-mp3decoder.html#stop-method">stop()</a>.</p>
 </div></div><!-- @@@running -->
 <br/>
 <!-- $$$sampleRate -->
@@ -123,6 +141,35 @@
 </div><div class="qmldoc"><p>Contains a time interval in milliseconds since <code>1970/01/01</code> when the audio signal started playing.</p>
 </div></div><!-- @@@startTime -->
 <br/>
+<!-- $$$state -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="state-prop">
+<td class="tblQmlPropNode"><p>
+<a name="state-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">state</span> : <span class="type">bool</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Contains the current internal state of the <a href="qml-mp3decoder.html">MP3Decoder</a>.</p>
+<p>This property can have one of the following values:</p>
+<ul>
+<li><code>MP3Decoder::Idle</code> - When the <a href="qml-mp3decoder.html">MP3Decoder</a> is currently ready to start decoding and playing audio. In this state <a href="qml-mp3decoder.html#idle-prop">idle</a> is set to true. You can call <a href="qml-mp3decoder.html#play-method">play()</a> in this state.</li>
+<li><code>MP3Decoder::Playing</code> - When the <a href="qml-mp3decoder.html">MP3Decoder</a> is currently decoding and playing audio. In this state <a href="qml-mp3decoder.html#running-prop">running</a> is set to true. You can call <a href="qml-mp3decoder.html#stop-method">stop()</a> in this state.</li>
+<li><code>MP3Decoder::Stopping</code> - When the <a href="qml-mp3decoder.html">MP3Decoder</a> is currently stopping the decoding process In this state <a href="qml-mp3decoder.html#stopping-prop">stopping</a> is set to true. You can call neither <a href="qml-mp3decoder.html#play-method">play()</a> nor <a href="qml-mp3decoder.html#stop-method">stop()</a> in this state. Instead wait until the state resets to <code>Idle</code> first.</li>
+</ul>
+<p><b>See also </b><a href="qml-mp3decoder.html#idle-prop">idle</a>, <a href="qml-mp3decoder.html#running-prop">running</a>, <a href="qml-mp3decoder.html#stopping-prop">stopping</a>, <a href="qml-mp3decoder.html#play-method">play()</a>, and <a href="qml-mp3decoder.html#stop-method">stop()</a>.</p>
+</div></div><!-- @@@state -->
+<br/>
+<!-- $$$stopping -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="stopping-prop">
+<td class="tblQmlPropNode"><p>
+<a name="stopping-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">stopping</span> : <span class="type">bool</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Contains <code>true</code> if the <a href="qml-mp3decoder.html">MP3Decoder</a> is currently stopping the decoding process.</p>
+<p>This is <code>true</code> after calling <a href="qml-mp3decoder.html#stop-method">stop()</a> until the current audio buffer is empty.</p>
+<p><b>See also </b><a href="qml-mp3decoder.html#state-prop">state</a>, <a href="qml-mp3decoder.html#idle-prop">idle</a>, <a href="qml-mp3decoder.html#running-prop">running</a>, <a href="qml-mp3decoder.html#play-method">play()</a>, and <a href="qml-mp3decoder.html#stop-method">stop()</a>.</p>
+</div></div><!-- @@@stopping -->
+<br/>
 <h2>Method Documentation</h2>
 <!-- $$$play -->
 <div class="qmlitem"><div class="qmlproto">
@@ -133,6 +180,7 @@
 </table></div>
 </div><div class="qmldoc"><p>Decode and play back an MP3 stream in the <a href="qml-mp3decoder.html">MP3Decoder</a>.</p>
 <p>The parameter <i>stream</i> can either be an MP3 file's path or an <a href="qml-audiostream.html">AudioStream</a> instance.</p>
+<p><b>See also </b><a href="qml-mp3decoder.html#stop-method">stop()</a> and <a href="qml-mp3decoder.html#state-prop">state</a>.</p>
 </div></div><!-- @@@play -->
 <br/>
 <!-- $$$stop -->
@@ -143,6 +191,7 @@
 <a name="stop-method"></a><span class="name">stop</span>()</p></td></tr>
 </table></div>
 </div><div class="qmldoc"><p>Stop current audio decoding and playback.</p>
+<p><b>See also </b><a href="qml-mp3decoder.html#play-method">play()</a> and <a href="qml-mp3decoder.html#state-prop">state</a>.</p>
 </div></div><!-- @@@stop -->
 <br/>
 <hr/><p class="footer"><small><a href='https://cbartsch.github.io'>cbartsch.github.io</a></small></p></body>

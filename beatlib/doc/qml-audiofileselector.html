@@ -36,7 +36,7 @@
 <a name="methods"></a>
 <h2 id="methods">Methods</h2>
 <ul>
-<li class="fn">void <b><b><a href="qml-audiofileselector.html#openAudioStream-method">openAudioStream</a></b></b>(string <i>fileName</i>)</li>
+<li class="fn">AudioStream <b><b><a href="qml-audiofileselector.html#openAudioStream-method">openAudioStream</a></b></b>(string <i>fileName</i>)</li>
 <li class="fn">void <b><b><a href="qml-audiofileselector.html#selectAudioFile-method">selectAudioFile</a></b></b>()</li>
 <li class="fn">void <b><b><a href="qml-audiofileselector.html#selectAudioStream-method">selectAudioStream</a></b></b>()</li>
 </ul>
@@ -74,9 +74,10 @@
 <div class="table"><table class="qmlname">
 <tr valign="top" class="odd" id="openAudioStream-method">
 <td class="tblQmlFuncNode"><p>
-<a name="openAudioStream-method"></a><span class="type">void</span> <span class="name">openAudioStream</span>(<span class="type">string</span> <i>fileName</i>)</p></td></tr>
+<a name="openAudioStream-method"></a><span class="type"><a href="qml-audiostream.html">AudioStream</a></span> <span class="name">openAudioStream</span>(<span class="type">string</span> <i>fileName</i>)</p></td></tr>
 </table></div>
-</div><div class="qmldoc"><p>Open an audio file at <i>fileName</i> and create an <a href="qml-audiostream.html">AudioStream</a> instance.</p>
+</div><div class="qmldoc"><p>Open an audio file at <i>fileName</i> and create and return an <a href="qml-audiostream.html">AudioStream</a> instance.</p>
+<p><i>fileName</i> can be a direct file path, or any URLs native to the current platform, like <code>content://</code> or <code>file:///android_asset/</code> on Android.</p>
 </div></div><!-- @@@openAudioStream -->
 <br/>
 <!-- $$$selectAudioFile -->
