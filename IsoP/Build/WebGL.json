@@ -1,7 +1,7 @@
 {
 "companyName": "Impossibru",
 "productName": "TwistoMaze",
-"productVersion": "1",
+"productVersion": "1.0",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
 "wasmFrameworkUrl": "WebGL.wasm.framework.unityweb",
