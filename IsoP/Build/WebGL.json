@@ -1,7 +1,7 @@
 {
 "companyName": "Impossibru",
-"productName": "IsoMaze",
-"productVersion": "0.8",
+"productName": "TwistoMaze",
+"productVersion": "1",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
 "wasmFrameworkUrl": "WebGL.wasm.framework.unityweb",
@@ -12,5 +12,5 @@
 "cacheControl": {"default": "must-revalidate"},
 "developmentBuild": false,
 "multithreading": false,
-"unityVersion": "2019.3.5f1"
+"unityVersion": "2019.3.6f1"
 }
