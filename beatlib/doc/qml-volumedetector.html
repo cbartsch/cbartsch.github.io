@@ -31,7 +31,6 @@
 <h2 id="properties">Properties</h2>
 <ul>
 <li class="fn"><b><b><a href="qml-volumedetector.html#filterDelayMs-prop">filterDelayMs</a></b></b> : int</li>
-<li class="fn"><b><b><a href="qml-volumedetector.html#startTime-prop">startTime</a></b></b> : int</li>
 <li class="fn"><b><b><a href="qml-volumedetector.html#updateIntervalMs-prop">updateIntervalMs</a></b></b> : int</li>
 <li class="fn"><b><b><a href="qml-volumedetector.html#volume-prop">volume</a></b></b> : real</li>
 </ul>
@@ -52,17 +51,6 @@
 </table></div>
 </div><div class="qmldoc"><p>Set this to an estimate of the <a href="qml-directform2filter.html">DirectForm2Filter</a>'s delay time, in milliseconds. The volume will then be calculated and set that much time in advance.</p>
 </div></div><!-- @@@filterDelayMs -->
-<br/>
-<!-- $$$startTime -->
-<div class="qmlitem"><div class="qmlproto">
-<div class="table"><table class="qmlname">
-<tr valign="top" class="odd" id="startTime-prop">
-<td class="tblQmlPropNode"><p>
-<a name="startTime-prop"></a><span class="name">startTime</span> : <span class="type">int</span></p></td></tr>
-</table></div>
-</div><div class="qmldoc"><p>A time interval in milliseconds since <code>1970/01/01</code> when the filtering started. This is used to adjust the detected volume for the <a href="qml-volumedetector.html#filterDelayMs-prop">filterDelayMs</a> time.</p>
-<p>You can bind this variable to <a href="qml-mp3decoder.html#startTime-prop">MP3Decoder::startTime</a>.</p>
-</div></div><!-- @@@startTime -->
 <br/>
 <!-- $$$updateIntervalMs -->
 <div class="qmlitem"><div class="qmlproto">

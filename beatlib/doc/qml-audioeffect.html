@@ -12,6 +12,7 @@
 <div class="toc">
 <h3><a name="toc">Contents</a></h3>
 <ul>
+<li class="level1"><a href="#properties">Properties</a></li>
 <li class="level1"><a href="#methods">Methods</a></li>
 <li class="level1"><a href="#details">Detailed Description</a></li>
 </ul>
@@ -23,14 +24,21 @@
 <p>Analyzes and/or modifies <a href="qml-mp3decoder.html">MP3Decoder</a> output. <a href="#details">More...</a></p>
 <!-- @@@AudioEffect -->
 <div class="table"><table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import  </td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-beatdetector.html">BeatDetector</a>, <a href="qml-directform2filter.html">DirectForm2Filter</a>, <a href="qml-multieffect.html">MultiEffect</a>, and <a href="qml-peakfinder.html">PeakFinder</a></p>
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import  </td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-beatdetector.html">BeatDetector</a>, <a href="qml-directform2filter.html">DirectForm2Filter</a>, <a href="qml-multieffect.html">MultiEffect</a>, <a href="qml-peakfinder.html">PeakFinder</a>, and <a href="qml-spectrumdetector.html">SpectrumDetector</a></p>
 </td></tr></table></div><ul>
 <li><a href="qml-audioeffect-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="properties"></a>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn"><b><b><a href="qml-audioeffect.html#enabled-prop">enabled</a></b></b> : bool</li>
+<li class="fn"><b><b><a href="qml-audioeffect.html#startTime-prop">startTime</a></b></b> : int</li>
 </ul>
 <a name="methods"></a>
 <h2 id="methods">Methods</h2>
 <ul>
 <li class="fn">bool <b><b><a href="qml-audioeffect.html#processSample-method">processSample</a></b></b>(var <i>channels</i>,  int <i>sampleIndex</i>,  real <i>maxValue</i>,  real <i>minValue</i>)</li>
+<li class="fn">void <b><b><a href="qml-audioeffect.html#resetState-method">resetState</a></b></b>()</li>
 </ul>
 <!-- $$$AudioEffect-description -->
 <a name="details"></a>
@@ -46,6 +54,30 @@
 <li><a href="qml-volumedetector.html">VolumeDetector</a></li>
 </ul>
 <!-- @@@AudioEffect -->
+<h2>Property Documentation</h2>
+<!-- $$$enabled -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="enabled-prop">
+<td class="tblQmlPropNode"><p>
+<a name="enabled-prop"></a><span class="name">enabled</span> : <span class="type">bool</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Determines if the effect is enabled.</p>
+<p>If this property is set to false, <a href="qml-mp3decoder.html">MP3Decoder</a> and <a href="qml-multieffect.html">MultiEffect</a> will ignore this effect.</p>
+</div></div><!-- @@@enabled -->
+<br/>
+<!-- $$$startTime -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="startTime-prop">
+<td class="tblQmlPropNode"><p>
+<a name="startTime-prop"></a><span class="name">startTime</span> : <span class="type">int</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>A time interval in milliseconds since <code>1970/01/01</code> when the filtering started.</p>
+<p>Implementations can use this to calculate the actual time when a specific sample in the audio signal will be played back.</p>
+<p>You can bind this variable in QML to <a href="qml-mp3decoder.html#startTime-prop">MP3Decoder::startTime</a>.</p>
+</div></div><!-- @@@startTime -->
+<br/>
 <h2>Method Documentation</h2>
 <!-- $$$processSample -->
 <div class="qmlitem"><div class="qmlproto">
@@ -58,6 +90,17 @@
 <p>This method should be overridden in custom <a href="qml-audioeffect.html">AudioEffect</a> implementations. The values in <i>channels</i> can be modified. However the data is only written back to the original signal if this method returns true. Even if you did not modifiy the data, return false to indicate this, for improved performance.</p>
 <p>The parameter <i>sampleIndex</i> indicates this sample's index, from the start of the audio signal. The parameters <i>minValue</i> and <i>maxValue</i> indicate the sample's range. These are often but not necessarily <code>-1.0</code> and <code>1.0</code>, respectively.</p>
 <p><b>Note: </b>This method is not callable from QML, it is only called internal from <a href="qml-mp3decoder.html">MP3Decoder</a>.</p></div></div><!-- @@@processSample -->
+<br/>
+<!-- $$$resetState -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="resetState-method">
+<td class="tblQmlFuncNode"><p>
+<a name="resetState-method"></a><span class="type">void</span> <span class="name">resetState</span>()</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Reset the audio effect algorithm's state and memory. Call this to treat the rest of the <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal like a completely new audio signal.</p>
+<p>Implementations of this class may override this method to clear any temporary algorithm state.</p>
+</div></div><!-- @@@resetState -->
 <br/>
 <hr/><p class="footer"><small><a href='https://cbartsch.github.io'>cbartsch.github.io</a></small></p></body>
 </html>

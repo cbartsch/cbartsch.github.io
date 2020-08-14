@@ -55,7 +55,7 @@
 </div><div class="qmldoc"><p>The DF2 filter's data. Set it to a JSON object with the following entries:</p>
 <ul>
 <li><code>order</code>: The filter's order, or the number of iterations it performs. This is twice the number of second order sections the filter contains.</li>
-<li><code>sosMatrix</code>: The filter's second order sections data, as a 2D JS array of <code>real</code> values. It should have <code>order / 2</code> sub-entries each with 6 <code>real</code> values. These 6 values represent this filter section's coefficients <code>a0, a1, a2, b0, b1, b2</code>.</li>
+<li><code>sosMatrix</code>: The filter's second order sections data, as a 2D JS array of <code>real</code> values. It should have <code>order / 2</code> sub-entries each with 6 <code>real</code> values. These 6 values represent this filter section's coefficients <code>B0, B1, B2, A0, A1, A2</code>.</li>
 <li><code>scaleValues</code>: The filter's second order sections scale values, as a JS array of <code>real</code> values.</li>
 </ul>
 <p>Example:</p>
@@ -76,7 +76,7 @@
     ]
   })
 }</pre>
-</div></div><!-- @@@data -->
+<p><b>Note: </b>The value <code>A0</code> for a DF2 filter is always <code>1</code>, so the actual value of the fourth entry in a sos-section is ignored.</p></div></div><!-- @@@data -->
 <br/>
 <h2>Method Documentation</h2>
 <!-- $$$resetState -->
