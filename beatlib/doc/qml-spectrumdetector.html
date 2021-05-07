@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- spectrumdetector.qdoc -->
+  <title>SpectrumDetector QML Type | BeatLib</title>
+<link rel="stylesheet" type="text/css" href="style/style.css"/>
+</head>
+<body>
+<p class="header"><small><a href='./index.html'>BeatLib</a></small></p><hr/><div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">SpectrumDetector QML Type</h1>
+<span class="subtitle"></span>
+<!-- $$$SpectrumDetector-brief -->
+<p>Detects an audio signal's frequency spectrum. <a href="#details">More...</a></p>
+<!-- @@@SpectrumDetector -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import  </td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-audioeffect.html">AudioEffect</a></p>
+</td></tr></table></div><ul>
+<li><a href="qml-spectrumdetector-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="properties"></a>
+<h2 id="properties">Properties</h2>
+<ul>
+<li class="fn"><b><b><a href="qml-spectrumdetector.html#preEffect-prop">preEffect</a></b></b> : AudioEffect</li>
+<li class="fn"><b><b><a href="qml-spectrumdetector.html#spectrumData-prop">spectrumData</a></b></b> : SpectrumData</li>
+<li class="fn"><b><b><a href="qml-spectrumdetector.html#spectrumSize-prop">spectrumSize</a></b></b> : int</li>
+<li class="fn"><b><b><a href="qml-spectrumdetector.html#startFrequency-prop">startFrequency</a></b></b> : real</li>
+</ul>
+<!-- $$$SpectrumDetector-description -->
+<a name="details"></a>
+<h2 id="details">Detailed Description</h2>
+<p>Detects information about an <a href="qml-mp3decoder.html">MP3Decoder</a>'s audio signal's spectrum. It does so by performing a fast fourier transform (FFT) on the audio signal. It then calculates certain information from the FFT spectrum. That information is then available via <a href="qml-spectrumdetector.html#spectrumData-prop">spectrumData</a>.</p>
+<p>This effect uses the <a href="http://www.fftw.org/">FFTW3 library</a> internally.</p>
+<!-- @@@SpectrumDetector -->
+<h2>Property Documentation</h2>
+<!-- $$$preEffect -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="preEffect-prop">
+<td class="tblQmlPropNode"><p>
+<a name="preEffect-prop"></a><span class="name">preEffect</span> : <span class="type"><a href="qml-audioeffect.html">AudioEffect</a></span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>An instance of an <a href="qml-audioeffect.html">AudioEffect</a> implementation to be applied to the input signal before the spectrum analysis.</p>
+<p>You can set this to any <a href="qml-audioeffect.html">AudioEffect</a> instance, or <code>null</code>, which is the default value.</p>
+</div></div><!-- @@@preEffect -->
+<br/>
+<!-- $$$spectrumData -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="spectrumData-prop">
+<td class="tblQmlPropNode"><p>
+<a name="spectrumData-prop"></a><span class="qmlreadonly">[read-only] </span><span class="name">spectrumData</span> : <span class="type">SpectrumData</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Contains information about the audio signal at the current playback time.</p>
+<p>This is a C++ object with the following properties:</p>
+<ul>
+<li><code>maxFrequency</code> - The frequency with the highest amplitude, but not below <a href="qml-spectrumdetector.html#startFrequency-prop">startFrequency</a>.</li>
+<li><code>meanFrequency</code> - The mean frequency of the power spectrum. This is calculated by averaging every frequency weighted by its power (square of the amplitude).</li>
+<li><code>dcValue</code> - The amplitude of the DC value (frequency 0).</li>
+</ul>
+</div></div><!-- @@@spectrumData -->
+<br/>
+<!-- $$$spectrumSize -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="spectrumSize-prop">
+<td class="tblQmlPropNode"><p>
+<a name="spectrumSize-prop"></a><span class="name">spectrumSize</span> : <span class="type">int</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Size for the FFT transform, in samples.</p>
+<p>Powers of 2, e.g&#x2e; 1024 will yield the best results.</p>
+</div></div><!-- @@@spectrumSize -->
+<br/>
+<!-- $$$startFrequency -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="startFrequency-prop">
+<td class="tblQmlPropNode"><p>
+<a name="startFrequency-prop"></a><span class="name">startFrequency</span> : <span class="type">real</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Minimum frequency for detecting <a href="qml-spectrumdetector.html#spectrumData-prop">spectrumData</a>'s <code>maxFrequency</code>.</p>
+</div></div><!-- @@@startFrequency -->
+<br/>
+<hr/><p class="footer"><small><a href='https://cbartsch.github.io'>cbartsch.github.io</a></small></p></body>
+</html>
