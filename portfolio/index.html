@@ -14,6 +14,8 @@
       height: 100%;
       width: 100%;
       font-family: Helvetica, Arial, sans-serif;
+      background-color: black;
+      color: white;
     }
 
     #qtstatus {
@@ -23,7 +25,7 @@
     /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
     canvas {
       border: 0px none;
-      background-color: white;
+      background-color: black;
       height: 100%;
       width: 100%;
     }
@@ -42,10 +44,10 @@
 <body onload="init()">
   <figure style="overflow:visible;" id="qtspinner">
     <center style="margin-top:1.5em; line-height:150%">
-      <img src="felgo-logo.png" width="150" height="150" style="display:block; margin-bottom: 10px;"></img>
-      <strong>PortfolioWebApp</strong>
+     <!-- <img src="felgo-logo.png" width="150" height="150" style="display:block; margin-bottom: 10px;"></img>-->
+      <strong>Loading WebAssembly app...<!--PortfolioWebApp--></strong>
       <div id="qtstatus"></div>
-      <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
+      <noscript>This app requires JavaScript. (<a href="..">Scriptless version</a>)</noscript>
     </center>
   </figure>
   <canvas id="qtcanvas" oncontextmenu="event.preventDefault()" contenteditable="true"></canvas>
