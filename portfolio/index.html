@@ -1,187 +1,92 @@
 <!doctype html>
 <html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>PortfolioWebApp</title>
-  <style>
-    html,
-    body {
-      padding: 0;
-      margin: 0;
-      overflow: hidden;
-      height: 100%;
-      width: 100%;
-      font-family: Helvetica, Arial, sans-serif;
-      background-color: black;
-      color: white;
-    }
+    <!--Set visual viewport size for mobile devices to the device size,
+        witch results in a scale of 1 and a 1:1 mapping between CSS pixels
+        and Qt device independent pixels. -->
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=0"/>
 
-    #qtstatus {
-      margin-top: 10px;
-    }
-
-    /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
-    canvas {
-      border: 0px none;
-      background-color: black;
-      height: 100%;
-      width: 100%;
-    }
-
-    /* The contenteditable property is set to true for the canvas in order to support
-         clipboard events. Hide the resulting focus frame and set the cursor back to
-         the default cursor. */
-    canvas {
-      outline: 0px solid transparent;
-      caret-color: transparent;
-      cursor: default
-    }
-  </style>
-</head>
-
-<body onload="init()">
-  <figure style="overflow:visible;" id="qtspinner">
-    <center style="margin-top:1.5em; line-height:150%">
-     <!-- <img src="felgo-logo.png" width="150" height="150" style="display:block; margin-bottom: 10px;"></img>-->
-      <strong>Loading WebAssembly app...<!--PortfolioWebApp--></strong>
-      <div id="qtstatus"></div>
-      <noscript>This app requires JavaScript. (<a href="noscript">Scriptless version</a>)</noscript>
-    </center>
-  </figure>
-  <canvas id="qtcanvas" oncontextmenu="event.preventDefault()" contenteditable="true"></canvas>
-
-  <script type='text/javascript'>
-
-    // WebChannel objects
-    let qWebChannel;
-    let wasmTransport = { }
-    let webObject;
-
-    //Avoid cross origin resource restrictions, modify accordingly
-    // Note: for production ready applications use your own implementation of cors-anywhere.
-    (function () {
-      var cors_api_host = 'cors-anywhere.herokuapp.com';
-      var cors_api_url = 'https://' + cors_api_host + '/';
-      var slice = [].slice;
-      var origin = window.location.protocol + '//' + window.location.host;
-      var open = XMLHttpRequest.prototype.open;
-      XMLHttpRequest.prototype.open = function () {
-        var args = slice.call(arguments);
-        var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
-        if (targetOrigin.indexOf('<your-restricted-domain>') > -1 &&
-          targetOrigin[1] !== cors_api_host) {
-          args[1] = cors_api_url + args[1];
-        }
-        return open.apply(this, args);
-      };
-    })();
-
-    //Avoid mixed content
-    // Disable for local testing
-    (function () {
-      var slice = [].slice;
-      var open = XMLHttpRequest.prototype.open;
-      XMLHttpRequest.prototype.open = function () {
-        var args = slice.call(arguments);
-        if (args[1].indexOf('http:') == 0) {
-          args[1] = args[1].replace('http://', 'https://');
-        }
-        return open.apply(this, args);
-      };
-    })();
-
-    //Safari 13.1, 14 workaround
-    if ((navigator.userAgent.indexOf('AppleWebKit') != -1) && (navigator.userAgent.indexOf('Version/13') != -1 || navigator.userAgent.indexOf('Version/14') != -1)) {
-      navigator.permissions = {
-        query: function () { }
+    <title>Portfolio WebApp</title>
+    <style>
+      /* Make the html body cover the entire (visual) viewport with no scroll bars. */
+      html, body {
+        padding: 0; margin: 0; overflow: hidden; height: 100%;
+        color: white;
+        background-color: black;
       }
-    }
+      #screen { width: 100%; height: 100%; }
+      #appname { font-size: 24pt; text-align: center; }
+      #loadingtext { width: 100%; bottom: 0px; position: absolute; background-color: black; opacity: 0.9; }
+      #qtspinner { width: 100%; height: 100%; position: relative;}
+      #appicon { width: 20%; height: 20%; object-fit: contain; margin: auto; } 
+      #qtstatus { text-align: center; }
+    </style>
 
-    // Felgo App initialized from Wasm
-    function felgoInitWebTransport() {
-      wasmTransport.send = Module.felgoWebTransportSender;
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163972040-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      Module.felgoWebTransportReceiver = function(message) {
-        try {
-          wasmTransport.onmessage({data: message})
-        }catch(err){
-          console.error(err);
-        }
-      }
+      gtag('config', 'UA-163972040-1');
 
-      new QWebChannel(wasmTransport, function(channel){
-        webObject = channel.objects.webObject;
-
-        webObject.url = window.location.href
-        document.title = webObject.title
-
-        webObject.urlChanged.connect(function() {
-          history.pushState({},"", webObject.url)
-        })
-
-        webObject.titleChanged.connect(function() {
-          document.title = webObject.title;
-        })
-
-        webObject.clientReady("Some message or object")
-
-        //Update the Url from state changes, browser back navigation
-        window.addEventListener('popstate', function (event) {
-          webObject.url = window.location.href
-        })
-      })
-    }
-
-    function init() {
-      var spinner = document.querySelector('#qtspinner');
-      var canvas = document.querySelector('#qtcanvas');
-      var status = document.querySelector('#qtstatus')
-
-      var qtLoader = QtLoader({
-        environment: {
-          QML_DISABLE_DISK_CACHE: 1
-        },
-        canvasElements: [canvas],
-        showLoader: function (loaderStatus) {
-          spinner.style.display = 'block';
-          canvas.style.display = 'none';
-          var displayedStatus = loaderStatus;
-          if (displayedStatus === "Compiling" || displayedStatus === "Downloading/Compiling")
-            displayedStatus = "Starting";
-          status.innerHTML = displayedStatus + "...";
-        },
-        showError: function (errorText) {
-          status.innerHTML = errorText;
-          spinner.style.display = 'block';
-          canvas.style.display = 'none';
-        },
-        showExit: function () {
-          return;
-          status.innerHTML = "Application exit";
-          if (qtLoader.exitCode !== undefined)
-            status.innerHTML += " with code " + qtLoader.exitCode;
-          if (qtLoader.exitText !== undefined)
-            status.innerHTML += " (" + qtLoader.exitText + ")";
-          spinner.style.display = 'block';
-          canvas.style.display = 'none';
-        },
-        showCanvas: function () {
-          spinner.style.display = 'none';
-          canvas.style.display = 'block';
-        },
-        statusChanged: function(status) {
-          if (status == "Running") {
-            Module.felgoInitialized = felgoInitWebTransport;
-          }
-        }
+      gtag("event", "screen_view", {
+        "screen_name": "Main WASM",
+        "app_name": "Portfolio WebApp"
       });
-      qtLoader.loadEmscriptenModule("PortfolioWebApp");
-    }
-  </script>
-  <script type="text/javascript" src="qtloader.js"></script>
-  <script type="text/javascript" src="qwebchannel.js"></script>
-</body>
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="qtspinner">
+      <img src="felgo-logo.png" id="appicon" style="display:block"></img>
+      <div id="loadingtext">
+        <p id="appname">Portfolio WebApp</p>
+        <p id="qtstatus">Loading...</p>
+        <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
+      </div>
+    </div>
+    <canvas id="screen" inputmode="none"></canvas>
 
+    <script type='text/javascript'>
+        let qtLoader = undefined;
+        function init() {
+          var spinner = document.querySelector('#qtspinner');
+          var canvas = document.querySelector('#screen');
+          var status = document.querySelector('#qtstatus')
+
+          qtLoader = new QtLoader({
+              canvasElements : [canvas],
+              showLoader: function(loaderStatus) {
+                  spinner.style.display = 'block';
+                  canvas.style.display = 'none';
+                 // status.innerHTML = loaderStatus + "...";
+              },
+              showError: function(errorText) {
+                  status.innerHTML = errorText;
+                  spinner.style.display = 'block';
+                  canvas.style.display = 'none';
+              },
+              showExit: function() {
+                  status.innerHTML = "Application exit";
+                  if (qtLoader.exitCode !== undefined)
+                      status.innerHTML += " with code " + qtLoader.exitCode;
+                  if (qtLoader.exitText !== undefined)
+                      status.innerHTML += " (" + qtLoader.exitText + ")";
+                  spinner.style.display = 'block';
+                  canvas.style.display = 'none';
+              },
+              showCanvas: function() {
+                  spinner.style.display = 'none';
+                  canvas.style.display = 'block';
+              },
+          });
+          qtLoader.loadEmscriptenModule("appPortfolioWebApp");
+      }
+    </script>
+    <script type="text/javascript" src="qtloader.js"></script>
+  </body>
 </html>
