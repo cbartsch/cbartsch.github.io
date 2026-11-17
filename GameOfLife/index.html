@@ -1,0 +1,154 @@
+<!doctype html>
+<!--
+  HTML page for the WebAssembly build, configured by CMake (see CMakeLists.txt)
+  appGameOfLife: name of the executable (.js / .wasm files)
+  appGameOfLife_entry: Emscripten module factory created by Qt (EXPORT_NAME)
+
+  URL parameters:
+  ?webgldebug  log details of failing WebGL draw calls (active shaders, vertex attributes)
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- 1:1 mapping between CSS pixels and Qt device independent pixels on mobile devices -->
+  <meta name="viewport" content="width=device-width, height=device-height, user-scalable=0">
+
+  <title>Game of Life</title>
+  <link rel="icon" href="favicon.ico">
+
+  <style>
+    /* cover the entire viewport without scroll bars, dark background avoids a white flash */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      color: #ddd;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    #screen {
+      width: 100%;
+      height: 100%;
+    }
+
+    #loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    #loader h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    #status {
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loader">
+    <h1>Game of Life</h1>
+    <div id="status">Loading...</div>
+    <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
+  </div>
+  <div id="screen"></div>
+
+  <script>
+    // optional WebGL debugging: logs failing draw calls with the active shaders
+    // and vertex attributes that are enabled without a buffer (see ?webgldebug)
+    if(new URLSearchParams(window.location.search).has("webgldebug")) {
+      for(const ctx of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
+        if(!ctx) {
+          continue
+        }
+
+        const proto = ctx.prototype
+        const drawElements = proto.drawElements
+
+        proto.drawElements = function(...args) {
+          drawElements.apply(this, args)
+
+          const error = this.getError()
+          if(error === this.NO_ERROR) {
+            return
+          }
+
+          const attribs = []
+          for(let i = 0; i < this.getParameter(this.MAX_VERTEX_ATTRIBS); i++) {
+            if(this.getVertexAttrib(i, this.VERTEX_ATTRIB_ARRAY_ENABLED)) {
+              const buffer = this.getVertexAttrib(i, this.VERTEX_ATTRIB_ARRAY_BUFFER_BINDING)
+              attribs.push(i + (buffer ? ": buffer" : ": NO BUFFER"))
+            }
+          }
+          console.warn("drawElements error", error, "attribs:", attribs.join(", "))
+
+          const program = this.getParameter(this.CURRENT_PROGRAM)
+          for(const shader of program ? this.getAttachedShaders(program) : []) {
+            console.warn(this.getShaderSource(shader))
+          }
+        }
+      }
+      console.log("WebGL debugging enabled")
+    }
+
+    async function init() {
+      const loader = document.querySelector("#loader")
+      const screen = document.querySelector("#screen")
+      const status = document.querySelector("#status")
+
+      const showLoader = (text) => {
+        status.textContent = text
+        loader.style.display = "flex"
+        screen.style.display = "none"
+      }
+
+      const showScreen = () => {
+        loader.style.display = "none"
+        screen.style.display = "block"
+      }
+
+      try {
+        showLoader("Loading...")
+
+        await qtLoad({
+          qt: {
+            entryFunction: window["appGameOfLife_entry"],
+            containerElements: [screen],
+            onLoaded: showScreen,
+            onExit: (exitData) => {
+              let text = "Application exited"
+              if(exitData.code !== undefined) {
+                text += ` with code ${exitData.code}`
+              }
+              if(exitData.text !== undefined) {
+                text += ` (${exitData.text})`
+              }
+              showLoader(text)
+            }
+          }
+        })
+      }
+      catch(e) {
+        console.error(e)
+        showLoader("Failed to start: " + e)
+      }
+    }
+
+    window.addEventListener("load", init)
+  </script>
+  <script src="appGameOfLife.js"></script>
+  <script src="qtloader.js"></script>
+</body>
+</html>
