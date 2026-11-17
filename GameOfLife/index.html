@@ -11,6 +11,11 @@
 <head>
   <meta charset="utf-8">
 
+  <!-- adds the COOP/COEP headers required for threads (SharedArrayBuffer) via a service worker,
+       for hosts that do not allow custom headers (e.g. GitHub Pages) - must be the first script,
+       reloads the page once on the first visit, does nothing if the server already sends the headers -->
+  <script src="coi-serviceworker.js"></script>
+
   <!-- 1:1 mapping between CSS pixels and Qt device independent pixels on mobile devices -->
   <meta name="viewport" content="width=device-width, height=device-height, user-scalable=0">
 
