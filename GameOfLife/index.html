@@ -6,6 +6,7 @@
 
   URL parameters:
   ?webgldebug  log details of failing WebGL draw calls (active shaders, vertex attributes)
+  ?nowebglfix  disable the workaround for vertex attributes without buffer (to test the bug)
 -->
 <html lang="en">
 <head>
@@ -71,15 +72,74 @@
   <div id="screen"></div>
 
   <script>
-    // optional WebGL debugging: logs failing draw calls with the active shaders
-    // and vertex attributes that are enabled without a buffer (see ?webgldebug)
-    if(new URLSearchParams(window.location.search).has("webgldebug")) {
+    // URL parameters, see top of the file
+    const urlParams = new URLSearchParams(window.location.search)
+
+    // calls callback(prototype) for each WebGL context type the browser supports
+    function forEachWebGLPrototype(callback) {
       for(const ctx of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
-        if(!ctx) {
-          continue
+        if(ctx) {
+          callback(ctx.prototype)
+        }
+      }
+    }
+
+    // WebGL workaround: Qt sometimes leaves a vertex attribute enabled whose buffer has been
+    // deleted (e.g. after resizing). WebGL then rejects every draw call with INVALID_OPERATION
+    // ("no buffer is bound to enabled attribute") and the whole board disappears.
+    // Before each draw, enabled attributes without a buffer are disabled again - safe, because
+    // no draw call can use such an attribute anyway (disable with ?nowebglfix to test the bug)
+    if(!urlParams.has("nowebglfix")) {
+      forEachWebGLPrototype((proto) => {
+        const enable = proto.enableVertexAttribArray
+        const disable = proto.disableVertexAttribArray
+
+        // locations that were ever enabled, so only those are checked per draw call
+        // (never removed: an attribute disabled in one vertex array object may still be
+        // enabled in another one)
+        const usedLocations = new Set()
+        const reportedLocations = new Set()
+
+        proto.enableVertexAttribArray = function(index) {
+          usedLocations.add(index)
+          return enable.call(this, index)
         }
 
-        const proto = ctx.prototype
+        const disableUnboundAttribs = (gl) => {
+          for(const index of usedLocations) {
+            if(gl.getVertexAttrib(index, gl.VERTEX_ATTRIB_ARRAY_ENABLED)
+               && !gl.getVertexAttrib(index, gl.VERTEX_ATTRIB_ARRAY_BUFFER_BINDING)) {
+              disable.call(gl, index)
+
+              if(!reportedLocations.has(index)) {
+                reportedLocations.add(index)
+                console.warn("WebGL workaround: disabled vertex attribute", index, "without buffer")
+              }
+            }
+          }
+        }
+
+        const drawFunctions = ["drawArrays", "drawElements", "drawArraysInstanced",
+                               "drawElementsInstanced", "drawRangeElements"]
+
+        for(const name of drawFunctions) {
+          const draw = proto[name]
+          if(!draw) {
+            continue
+          }
+
+          proto[name] = function(...args) {
+            disableUnboundAttribs(this)
+            return draw.apply(this, args)
+          }
+        }
+      })
+    }
+
+    // optional WebGL debugging: logs failing draw calls with the active shaders
+    // and vertex attributes that are enabled without a buffer (see ?webgldebug)
+    if(urlParams.has("webgldebug")) {
+      forEachWebGLPrototype((proto) => {
         const drawElements = proto.drawElements
 
         proto.drawElements = function(...args) {
@@ -104,7 +164,7 @@
             console.warn(this.getShaderSource(shader))
           }
         }
-      }
+      })
       console.log("WebGL debugging enabled")
     }
 
