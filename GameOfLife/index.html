@@ -1,11 +1,12 @@
 <!doctype html>
 <!--
-  HTML page for the WebAssembly build, configured by CMake (see CMakeLists.txt)
-  appGameOfLife: name of the executable (.js / .wasm files)
-  appGameOfLife_entry: Emscripten module factory created by Qt (EXPORT_NAME)
+  HTML page for the WebAssembly build, configured by configure_wasm_app() (lib/shader_utils/cmake/ShaderUtilsWasm.cmake)
+  gameGameOfLife: name of the executable (.js / .wasm files)
+  gameGameOfLife_entry: Emscripten module factory created by Qt (EXPORT_NAME)
 
   URL parameters:
   ?webgldebug  log details of failing WebGL draw calls (active shaders, vertex attributes)
+  ?nowebglfix  disable the workaround for vertex attributes without buffer (to test the bug)
 -->
 <html lang="en">
 <head>
@@ -13,7 +14,8 @@
 
   <!-- adds the COOP/COEP headers required for threads (SharedArrayBuffer) via a service worker,
        for hosts that do not allow custom headers (e.g. GitHub Pages) - must be the first script,
-       reloads the page once on the first visit, does nothing if the server already sends the headers -->
+       reloads the page once on the first visit, does nothing if the server already sends the headers
+       (only added for the multithreaded build with the CMake option WASM_COI_SERVICEWORKER) -->
   <script src="coi-serviceworker.js"></script>
 
   <!-- 1:1 mapping between CSS pixels and Qt device independent pixels on mobile devices -->
@@ -39,6 +41,17 @@
       height: 100%;
     }
 
+    /* touch input only goes to the app: holding a finger down to steer is a long press for the browser, which would
+       otherwise start its own handling (text selection, context menu, callout / magnifier on iOS, tap highlight)
+       (all elements, also the ones Qt creates inside of #screen, e.g. a hidden input field for keyboard input) */
+    * {
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     #loader {
       position: absolute;
       inset: 0;
@@ -60,6 +73,28 @@
       color: #888;
     }
   </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NK53ZQDZS8"></script>
+  <script>
+    console.log("Load and init GTAG.")
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // send events to this GA4 property, without the automatic page view on load (the app logs its screens itself)
+    gtag("config", "G-NK53ZQDZS8", { send_page_view: false });
+
+    // log a screen of the single page app, note: actual calls come from app via EM_JS call
+    function logScreen(name) {
+      const loc = location.origin + location.pathname + "#" + name
+      console.log("Send page_view:", name, "location:", loc)
+      gtag("event", "page_view", {
+        page_title: name,    // shown as screen name in GA4
+        page_location: loc,  // distinct "page" per screen
+      })
+    }
+  </script>
 </head>
 
 <body>
@@ -71,15 +106,74 @@
   <div id="screen"></div>
 
   <script>
-    // optional WebGL debugging: logs failing draw calls with the active shaders
-    // and vertex attributes that are enabled without a buffer (see ?webgldebug)
-    if(new URLSearchParams(window.location.search).has("webgldebug")) {
+    // URL parameters, see top of the file
+    const urlParams = new URLSearchParams(window.location.search)
+
+    // calls callback(prototype) for each WebGL context type the browser supports
+    function forEachWebGLPrototype(callback) {
       for(const ctx of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
-        if(!ctx) {
-          continue
+        if(ctx) {
+          callback(ctx.prototype)
+        }
+      }
+    }
+
+    // WebGL workaround: Qt sometimes leaves a vertex attribute enabled whose buffer has been
+    // deleted (e.g. after resizing). WebGL then rejects every draw call with INVALID_OPERATION
+    // ("no buffer is bound to enabled attribute") and the whole board disappears.
+    // Before each draw, enabled attributes without a buffer are disabled again - safe, because
+    // no draw call can use such an attribute anyway (disable with ?nowebglfix to test the bug)
+    if(!urlParams.has("nowebglfix")) {
+      forEachWebGLPrototype((proto) => {
+        const enable = proto.enableVertexAttribArray
+        const disable = proto.disableVertexAttribArray
+
+        // locations that were ever enabled, so only those are checked per draw call
+        // (never removed: an attribute disabled in one vertex array object may still be
+        // enabled in another one)
+        const usedLocations = new Set()
+        const reportedLocations = new Set()
+
+        proto.enableVertexAttribArray = function(index) {
+          usedLocations.add(index)
+          return enable.call(this, index)
         }
 
-        const proto = ctx.prototype
+        const disableUnboundAttribs = (gl) => {
+          for(const index of usedLocations) {
+            if(gl.getVertexAttrib(index, gl.VERTEX_ATTRIB_ARRAY_ENABLED)
+               && !gl.getVertexAttrib(index, gl.VERTEX_ATTRIB_ARRAY_BUFFER_BINDING)) {
+              disable.call(gl, index)
+
+              if(!reportedLocations.has(index)) {
+                reportedLocations.add(index)
+                console.warn("WebGL workaround: disabled vertex attribute", index, "without buffer")
+              }
+            }
+          }
+        }
+
+        const drawFunctions = ["drawArrays", "drawElements", "drawArraysInstanced",
+                               "drawElementsInstanced", "drawRangeElements"]
+
+        for(const name of drawFunctions) {
+          const draw = proto[name]
+          if(!draw) {
+            continue
+          }
+
+          proto[name] = function(...args) {
+            disableUnboundAttribs(this)
+            return draw.apply(this, args)
+          }
+        }
+      })
+    }
+
+    // optional WebGL debugging: logs failing draw calls with the active shaders
+    // and vertex attributes that are enabled without a buffer (see ?webgldebug)
+    if(urlParams.has("webgldebug")) {
+      forEachWebGLPrototype((proto) => {
         const drawElements = proto.drawElements
 
         proto.drawElements = function(...args) {
@@ -104,7 +198,7 @@
             console.warn(this.getShaderSource(shader))
           }
         }
-      }
+      })
       console.log("WebGL debugging enabled")
     }
 
@@ -127,9 +221,34 @@
       try {
         showLoader("Loading...")
 
-        await qtLoad({
+        // Emscripten uses this object as the module: properties set here or by C++ (EM_ASM/val) are shared
+        const config = {
+          // Felgo calls felgoInitialized.felgoInitWebTransport() after the main QML file is loaded and then
+          // sets up its QWebChannel to the page (crashes in FelgoApplication::initializeWebChannel() without it).
+          // Same as Felgo's wasm_shell_felgo.html, which is written for the loader API before Qt 6.6.
+          felgoInitialized: {
+            felgoInitWebTransport: () => {
+              const transport = { send: config.felgoWebTransportSender }
+
+              // messages from C++ to the page
+              config.felgoWebTransportReceiver = {
+                call: (message) => {
+                  try {
+                    transport.onmessage({ data: message })
+                  }
+                  catch(e) {
+                    console.error(e)
+                  }
+                }
+              }
+
+              // the channel object webObject only syncs the page URL and title, not used by this app
+              new QWebChannel(transport, () => {})
+            }
+          },
+
           qt: {
-            entryFunction: window["appGameOfLife_entry"],
+            entryFunction: window["gameGameOfLife_entry"],
             containerElements: [screen],
             onLoaded: showScreen,
             onExit: (exitData) => {
@@ -143,7 +262,9 @@
               showLoader(text)
             }
           }
-        })
+        }
+
+        await qtLoad(config)
       }
       catch(e) {
         console.error(e)
@@ -151,9 +272,18 @@
       }
     }
 
+    // no browser context menu on a long press (or right click), the app handles all input itself
+    window.addEventListener("contextmenu", (event) => event.preventDefault())
+
+    // no browser handling of touches at all (long press, gestures, simulated mouse events): Qt gets the touch input
+    // as pointer events, which still arrive (passive: false, otherwise preventDefault() is ignored)
+    document.addEventListener("touchstart", (event) => event.preventDefault(), { passive: false })
+
     window.addEventListener("load", init)
   </script>
-  <script src="appGameOfLife.js"></script>
+  <script src="gameGameOfLife.js"></script>
   <script src="qtloader.js"></script>
+  <!-- copied by felgo_configure_executable(), used for the WebChannel to Felgo (see felgoInitialized) -->
+  <script src="qwebchannel.js"></script>
 </body>
 </html>
